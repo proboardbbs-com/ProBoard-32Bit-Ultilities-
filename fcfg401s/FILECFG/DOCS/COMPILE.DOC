@@ -1,0 +1,60 @@
+This is the 'Compile.Doc' for FileCFG's Source Distribution. It contains
+important notes as well as a roadmap to the source code.
+
+Requirements:
+	* Borland C++ 3.1
+	* TurboVision 1.03
+	* PB-Lib v2.0r1 with Classes and TV add-ons
+
+Installation:
+	You need to install FileCFG in the correct directory. Assuming that
+you have PB-Lib installed already (refer to its documentation), go to the
+root directory (%SILICON%) and use the command:
+
+			pkunzip -od fcfg401s src\
+
+This will extract all the FileCFG source code in the %SILICON%\SRC\FILECFG
+directory and will reconstruct the necessary directory structure.
+
+Compilation:
+	Simply use the FileCFG.Prj file to make the normal version of FileCFG.
+If you would like to make the overlay version, use the FileCFGx.Prj and
+make sure you read the Overlay.Doc for compilation notes.
+
+Roadmap:
+	BaseEdit.H		- the base dialog (file/mesg/group are derived from it)
+	BaseEdit.Cpp	- implementation
+	ConfCmds.H		- the command and history list constants
+	FEdit.H			- file area editor dialog class
+	FEdit.Cpp		- implementation
+	FileCFG.H		- the help constants for the context-sensitive help
+	FileCFG.Cpp		- main module (main() and TApplication are here)
+	Files.H			- file area desktop dialog (derived from the base dialog)
+	Files.Cpp		- implementation
+	Gadgets.H		- various functions called by all modules
+	Gadgets.Cpp		- implementation
+	GEdit.H			- group editor dialog
+	GEdit.Cpp		- implementation
+	Groups.H		- group desktop dialog
+	Groups.Cpp		- implementation
+	MEdit.H			- message area editor dialog
+	MEdit.Cpp		- implementation
+	Mesgs.H			- message desktop dialog
+	Mesgs.Cpp		- implementation
+
+There are four distinct things concerning files and messages:
+
+	(1) Desktop Editor - the main dialog, arranges, moves, sorts, packs
+		tags, global operations, etc. for the areas
+	(2) Area Editor - the individual area editor dialogs
+	(3) Group Desktop Editor - the same as the desktop editor except it
+		works for groups.
+	(4) Group Editor - same as the area editor, but for groups.
+
+Since the structure of the MGROUPS.PB and FGROUPS.PB files are the same,
+the Group Desktop and Editor do not have separate implementations for the
+File and Message modes. Instead, a single class is used to handle both.
+With the areas, it is simply impossible because of the different way that
+data is saved and loaded, and different options available. I used to have
+those in a single class, but it soon becomes unmanageable.
+

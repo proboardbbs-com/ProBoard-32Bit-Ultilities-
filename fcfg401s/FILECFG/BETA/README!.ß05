@@ -1,0 +1,50 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+(I hope this is the final beta before the release, it turned out that
+there was a severe bug the in the file saving routines which caused
+corruption).
+
+Functional changes
+------------------
+	Fixed a severe bug in the saving function which would case corruptions
+	of the FILECFG.PRO and MESSAGES.PB files. It was due to the compiler
+	silently truncating the seek record number which sent the verifying
+	function into oblivion. You would not have noticed the problem if you
+	have less than 256 areas. Fixed now.
+
+	Also fixed preservation of settings for deleted areas. Until now,
+	FileCFG would set all fields in deleted areas (areas without a name)
+	to 0. This, however, is not correct behavior because an area without a
+	name (ignored by ProBoard) might actually have the other fields
+	defined. FileCFG will now preserve those fields.
+
+	On adding new areas, the 'Auto-added by FileCFG' string is no longer
+	present. Now the new areas look exactly the same as in ProCFG.
+
+Caveats
+-------
+	ProCFG will delete trailing empty areas when saving.. FileCFG will not
+	do that because the idea is that you can add empty areas at the end
+	and edit them later with ProCFG. Note that ProCFG has no problems with
+	reading and editing trailing empty areas, it will simply remove them
+	when saving (if they are still empty).
+
+	If you have many areas (> 1,000), you will notice a delay when closing
+	the file and message area editor dialog boxes. This is due to FileCFG
+	performing memory cleanup and verification routines. You will not be
+	able to do anything until the System menu drops automatically. This
+	delay is hardly noticeable on "normal" systems (those that have 500 or
+	less areas). This is a problem with inefficient routines in
+	TurboVision itself, which I can't do anything about.
+
+Cosmetic changes
+----------------
+	Added progress indicators to the save and load functions. Now you can
+	visibly see the percentage of the job completed. I decided to do that
+	because FileCFG becomes real sluggish with large number of areas
+	(numbers > 1,000). It does support up to 4,000 but the wait is
+	penalizing. Of course, we don't care because I don't know a single
+	system with 4,000 file areas.
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.

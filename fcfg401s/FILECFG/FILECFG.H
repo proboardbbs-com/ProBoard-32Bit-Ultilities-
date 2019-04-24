@@ -1,0 +1,135 @@
+/*
+ * FileCFG v4.0r1/Pro by Silicon Creations, Inc.
+ * Copyright (C) 1995-1996 Branislav L. Slantchev
+ * All Rights Reserved, All Wrongs Deserved!
+ *
+ * This file is released under the terms and conditions of the
+ * GNU General Public License (see the file 'Copying.Doc' for
+ * more information).
+ *
+ * The author can be contacted at 73023.262@compuserve.com
+ *
+ * Please, see Credits.Doc for credits and acknowledgements.
+ * Also, refer to Compile.Doc for compilation instructions.
+ *
+ * You need PB-Lib v2.0r1 (Full Release) with both the normal
+ * and overlay versions in order to be able to compile the
+ * source code. You also need TurboVision 1.03 with all the
+ * patches applied (see Patches.Doc for details) and recompiled
+ * in both the normal and overlay versions (see Overlay.Doc).
+*/
+#ifndef __FILECFG_H
+#define __FILECFG_H
+
+const
+  hcnoContext            = 0,
+  hcContents             = 1,
+  hcExecProg             = 2,
+  hcExit                 = 3,
+  hcFiles                = 4,
+  hcSystem               = 5,
+  hcShell                = 6,
+  hcProCfg               = 7,
+  hcMessage              = 8,
+  hcMaint                = 9,
+  hcMesg                 = 10,
+  hcHelp                 = 11,
+  hcFileGroup            = 12,
+  hcMesgGroup            = 13,
+  hcExtern               = 14,
+  hcFileCtl              = 15,
+  hcMesgCtl              = 16,
+  hcIndex                = 17,
+  hcReindexMsg           = 18,
+  hcContact              = 19,
+  hcLimits               = 20,
+  hcUsage                = 21,
+  hcAcks                 = 22,
+  hcAbout                = 23,
+  hcAkaDlg               = 24,
+  hcAreaName             = 25,
+  hcCancelButton         = 26,
+  hcChangeRecs           = 27,
+  hcChDir                = 28,
+  hcDelete               = 29,
+  hcEdit                 = 30,
+  hcFileAllGroups        = 31,
+  hcFileDateFormat       = 32,
+  hcFileDialog           = 33,
+  hcFileFlag             = 34,
+  hcFileFree             = 35,
+  hcFileGrpSel           = 36,
+  hcFileLevel            = 37,
+  hcFileList             = 38,
+  hcFileLoc              = 39,
+  hcFileLocal            = 40,
+  hcFileMaxFiles         = 41,
+  hcFileMaxKb            = 42,
+  hcFileMinAge           = 43,
+  hcFileTops             = 44,
+  hcFindFirst            = 45,
+  hcFindNext             = 46,
+  hcGlobAKA              = 47,
+  hcGlobAllGrps          = 48,
+  hcGlobCDROM            = 49,
+  hcGlobFlags            = 50,
+  hcGlobFree             = 51,
+  hcGlobKillDays         = 52,
+  hcGlobKillRecv         = 53,
+  hcGlobLevel            = 54,
+  hcGlobList             = 55,
+  hcGlobLoc              = 56,
+  hcGlobMaxFiles         = 57,
+  hcGlobMaxKB            = 58,
+  hcGlobMaxMsgs          = 59,
+  hcGlobMBase            = 60,
+  hcGlobMKind            = 61,
+  hcGlobMName            = 62,
+  hcGlobMType            = 63,
+  hcGlobOrigin           = 64,
+  hcGlobSFlags           = 65,
+  hcGlobSLevel           = 66,
+  hcGlobSysop            = 67,
+  hcGlobTops             = 68,
+  hcGlobWFlags           = 69,
+  hcGlobWLevel           = 70,
+  hcGotoNum              = 71,
+  hcGroupFlags           = 72,
+  hcGroupLevel           = 73,
+  hcGroupName            = 74,
+  hcHelpOnHelp           = 75,
+  hcInsert               = 76,
+  hcListBox              = 77,
+  hcMesgAka              = 78,
+  hcMesgAllGroups        = 79,
+  hcMesgAreaName         = 80,
+  hcMesgBase             = 81,
+  hcMesgEcho             = 82,
+  hcMesgGroupNum         = 83,
+  hcMesgHudson           = 84,
+  hcMesgKillDays         = 85,
+  hcMesgKillRecv         = 86,
+  hcMesgKind             = 87,
+  hcMesgMax              = 88,
+  hcMesgMinAge           = 89,
+  hcMesgName             = 90,
+  hcMesgOrigin           = 91,
+  hcMesgPath             = 92,
+  hcMesgQwk              = 93,
+  hcMesgReply            = 94,
+  hcMesgSysop            = 95,
+  hcMesgType             = 96,
+  hcMove                 = 97,
+  hcOKButton             = 98,
+  hcPack                 = 99,
+  hcReadFlags            = 100,
+  hcReadLevel            = 101,
+  hcRenumber             = 102,
+  hcSave                 = 103,
+  hcSort                 = 104,
+  hcSysopFlags           = 105,
+  hcSysopLevel           = 106,
+  hcWriteFlags           = 107,
+  hcWriteLevel           = 108,
+  hcLast                 = 109;
+#endif

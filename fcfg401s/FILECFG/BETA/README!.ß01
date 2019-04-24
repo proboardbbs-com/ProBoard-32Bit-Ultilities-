@@ -1,0 +1,120 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+
+What's new in FileCFG?
+----------------------
+
+Capacity
+--------
+	Increased capacity. FileCFG was not able to handle more than 1,500
+	areas in its first version. The current limit has been moved to 4,000.
+	Even though ProBoard supports up to 10,000 I haven't seen anyone that
+	uses all of them. I could increase the limit, but the program will
+	then need some additional memory handling which will slow it down
+	considerably. It is not very fast as it stands right now due to the
+	somewhat inefficient collection routines in TurboVision.
+
+New commands
+------------
+	Added new processing capabilities:
+
+		* text searching: you can now find areas by specifying a
+		  search string. The search is not case-sensitive. Use the 'Find'
+		  button to scan the areas, and the 'Next' button to continue
+		  scanning from last point. To make a new scan, press 'Find' again
+		  (this will always start from the beginning of the list). The
+		  search string can appear anywhere in the target area name. If a
+		  match is found, the area will be focused in the list window.
+
+		* area jumps. You can now go straight to a specified area by
+		  giving the number. Note that the number you enter (press the
+		  'Goto' button) will be the number of the area in the list 9which
+		  may or may not be the same as the visual number: the two will be
+		  equal after renumbering, though).
+
+		* global changes. You can change a lot of settings globally now.
+		  Like access flags, levels, free and copy local toggles, all
+		  groups, and file location and listings. Note that the last two
+		  can be somewhat tricky. You can either change the drive for the
+		  group of areas (very useful and often needed), or you can change
+		  the drive and the root directory for the area (or the list file
+		  pathname). The second option will simply use the new drive and
+		  path you specify and _append_ the old path information. For
+		  example, if you have this: 'D:\FDB\FILES\LISTS.BBS', and and you
+		  enter this: 'D:\BBS', then the new entry will be the result of
+		  the two strings: 'D:\BBS\FDB\FILES\LISTS.BBS'. You can omit the
+		  trialing backslash in the specification. No error checking will
+		  be performed.
+
+
+File handling
+-------------
+	Improved file handling safety. FileCFG will now check for the presence
+	of an old FILECFG.BAK in your ProBoard directory and will offer to
+	remove it. You should generally say 'Yes' here or some 'unexpected'
+	behavior will occur when you save the modified data. By 'unexpected' I
+	mean that FileCFG will always use the .BAK file as a copy of the
+	current original when saving data. Since FileCFG does not store
+	anything but the area names and numbers in memory, it will need to
+	read the original file when saving the modification. If the original
+	file was preserved from an old run (and changes have been made), you
+	will end up with the modifications applied agianst the old file and
+	your current one will be overwritten!!! This is not the case when you
+	allow FileCFG to delete the old backup. If you are not sure, you can
+	always copy the old backup to another name.
+
+	When applying the global changes, FileCFG will create a FILECFG.BKP
+	file. it will be deleted after the processing is complete, but if for
+	some reason it is left there, you can safely delete it afterwards.
+
+
+Cosmetic changes
+----------------
+	Also, some cosmetic changes have been made. The 'About' box has been
+	trimmed down and the background has been changed to normal. The main
+	menu will now auto-drop when no box is active on the desktop. Also,
+	the menu caption has been changed to read 'File areas' (this is to
+	signify that there will be a separate menu for the message areas).
+
+
+External programs
+-----------------
+	The file area menu has three slots for external programs. You will
+	need to use the SILICON.INI file in your ProBoard system directory to
+	enter the commandlines for them. Here's what I have set in my INI
+	file:
+
+				[FileCFG]
+				Allfix=D:\SBIN\ALLFIX\ASETUP.EXE
+				;AllfixMenu=A~l~lfix setup
+				FileMgr=D:\SBIN\FEBBS\FEBBS.EXE
+				;FileMenu=File area ~m~anager
+				AMU=D:\SBIN\AMU\AMUCFG.EXE
+				;AMUMenu=AMU ~c~onfiguration
+
+	As you can see, you need to specify the full path to the program and
+	the filename (plus extension) too. You can also change the text on the
+	menu by uncommenting and editing the *Menu fields. Note that if you
+	are willing to use more than one word, you don't need to enclose the
+	string in quotation marks (unless you want them badly :-). Surround the
+	hotkey desired with the '~' (tilde) character. This key will be
+	highlighted on the menu. Make sure you don't have the same hotkey
+	defined for more than one menu item.
+
+Removed
+-------
+	Removed the message area re-arranging. I will add it again as soon as
+	the file processing is complete and tested. The message areas turned
+	to be tricky and require more thought (for example, we will need to
+	reconfigure the reply-to areas if they are defined, and we will need
+	to change the hudson message numbers to match the new boards if they
+	are changed). The latter is still under consideration.
+
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.
+	I just returned from Austin (crazy trip! :) and I have been coding
+	all night. It's 6:39a right now and I am heading off to my math
+	homework for the 9:00a class. I guess I will get more sleep later. So,
+	if anything sliped my mind, I am sorry.. :-)
+

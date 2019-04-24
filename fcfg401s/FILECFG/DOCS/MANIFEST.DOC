@@ -1,0 +1,25 @@
+This is a list of all files included in the distribution:
+
+Root directory
+--------------
+	*.Cpp        - see RoadMap.Doc
+	*.H          - see RoadMap.Doc
+	FileCFG.Prj  - the normal version project file
+	FileCFGx.Prj - the overlay project file
+	FileCFG.Txt  - source for TVHC (the help compiler)
+	Spawno.*	 - Ralf Brown's Spawno modules
+	File_id.Diz  - BBS description file
+
+.\DOCS
+------
+	Compile.Doc  - compilation instructions
+	Overlay.Doc  - making the overlay version
+	Patches.Doc  - various patches to apply to TurboVision
+	Credits.Doc  - various credits and acknowledgements
+	Manifest.Doc - this file...
+	Copying.Doc  - the GNU General Public License
+
+.\BETA
+------
+	Readme!.*    - beta release notes (you can see how the work went on)
+

@@ -1,0 +1,14 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+(ok, yet another bug squashed, this is thanks to a post by Arthur Stark.
+The internal reindexing for the file/message base was screwed up.)
+
+Functional changes
+------------------
+	Fixed a severe bug in the re-indexing functions. FileCFG would not
+	correctly swap out to run the indexing. This was due to the midnight
+	frenzy of changes in beta 3 and slipped unnoticed until now. Thanks to
+	Arthur. I really need to be more careful next time.
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.

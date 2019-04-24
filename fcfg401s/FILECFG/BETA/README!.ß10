@@ -1,0 +1,60 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+
+If there aren't any severe bugs (any bugs!) this will be the finalized
+version of FileCFG ready for distribution. I am swamped with school
+projects right now (FileCFG kept me busy and I am behind on all my lab
+assignments), so I hope this will be the release version. If I don't
+hear about any bugs within 5 days of the release, I will unleash it
+to the masses! :-)
+
+We've come a long way with FileCFG!
+
+Note
+----
+	I forgot to mention this in the previous betas, but FileCFG will
+	not perform and checking on the message area numbers when you
+	renumber or re-arrange them. It is your responsibility (or you can
+	run ChkPRO) to make sure, for example, that no Hudson area number
+	exceeds 200. FileCFG will not renumber Hudson areas. The reason
+	is that ProBoard actually keeps two numbers for the Hudson areas:
+	one is the Hudson message base number and the other is the ProBoard
+	message area number. These should usually be the same, but I guess
+	it is also possible to have them different. That is why FileCFG does
+	not mess with them. Changing the number of the Hudson area would also
+	mean renumbering all the messages in the messagebase! I guess this is
+	exactly what the second number avoids doing! I would also guess that
+	the limitation to have Hudson areas numbers less than 200 applies only
+	when the message area is created. Once this is done (and the true
+	Hudson base number is stored), it can be moved anywhere (and the number
+	will remain the same). These are all my thoughts on the subject.. and
+	don't quote me on this!
+
+Functional changes
+------------------
+	Finally implemented the message area editor. Now you can edit individual
+	message areas, just like in ProCFG. However, some major conveniences
+	have been added: like ability to pick groups from a list instead of
+	just typing numbers. FileCFG also makes editable two fields that are
+	not available in ProCFG, the minimum age required to access the area
+	and the Hudson message board number. You are strongly advised to use
+	the Hudson number with extreme caution. Unless you know what you are
+	doing, do not change that number. This, of course, applies to Hudson
+	areas only. For the others, this number is ignored.
+
+Cosmetic changes and bug fixes
+------------------------------
+	Fixed some of the status line hints. Now more informative.
+
+	Found anf fixed the stupid bug that would cause the backspace key not
+	to be recognized in the input lines. I don't even want to say what
+	kind of error it was (ashamed of myself :-)
+
+	Found and fixed a bug that would sometimes cause a random heapcheck()
+	assertion failure of the program (was due to a PB-Lib function name
+	conflicting with TurboVision, my function behaved differently than the
+	one they have, but TV expected the behavior of the other one. I just
+	renamed mine).
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.

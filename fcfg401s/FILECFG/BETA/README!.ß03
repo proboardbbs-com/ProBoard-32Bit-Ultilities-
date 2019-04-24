@@ -1,0 +1,56 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+(note this beta was not released to testers, internal use only)
+
+Cosmetic changes
+----------------
+	Reworked the menu. Now the three external utilities are in their own
+	submenu off the file maintenance.
+
+	Moved the ProCFG setup to the System menu, now the file and message
+	editing menus have their own customized ProCFG startup command that
+	will take you straight to the file or message areas respectively.
+
+Functional changes
+------------------
+	Added FILEUTIL.CTL (optional) file processing. This is a simple text
+	file with programs to execute. A sample is included. Now you can run
+	all the necessary updates right after you're through configuring the
+	file areas. If this file does not exist, the option will be disabled.
+	The FILEUTIL.CTL file is a text file with commands. Each command must
+	be on a separate line. You must specify the full path and extension to
+	the program. You can also specify the necessary parameters. FileCFG
+	will change to the program's directory and execute the command there.
+	You cannot have blank lines in the file. Each line is either a comment
+	or a command line. A comment line will have ';' (semi-colon) as the
+	first (and only the first) character. Please, refer to the included
+	sample for a proposed setup.
+
+	Added MESGUTIL.CTL which is the same as above except it is executed
+	from the Message Area menu.
+
+	Added the Message Area handling functions with limited global support
+	for now. The file backup handling is the same as for the file area
+	editing. The commands in the editor are more or less the same. Note
+	that FileCFG will also update the 'reply to' board numbers if the
+	original is different than 0. In case the 'reply-to' are no longer
+	exists, this number will be set to zero (it is generally safer to
+	assume that less harm will be done that way).
+
+	Added message-base reindexing command to the message menu. Also added
+	external program support via SILICON.INI file (refer to the section in
+	README!.á02 about this file). The keywords are still under the
+	[FileCFG] header and here are the new ones:
+
+					[FileCFG]
+					InterEcho=D:\IM\IESETUP.EXE
+					IEMenu=InterEcho ~s~etup
+
+	Of course, it doesn't have to be InterEcho. This can be any program
+	and name you want. You just need to use the keywords above. If the
+	entry is missing and/or the program is not available, you won't be
+	able to select this option.
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.
+

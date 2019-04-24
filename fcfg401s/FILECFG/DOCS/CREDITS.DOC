@@ -1,0 +1,31 @@
+This is the 'Credits.Doc' file for FileCFG's Source Distribution.
+
+This program uses the following swapping module:
+
+	SPAWNO v4.0   EMS/XMS/disk swapping replacement for spawn...()
+	(c) Copyright 1990, 1991 Ralf Brown  All Rights Reserved.
+	May be freely copied provided that this copyright notice is
+	not altered or removed.
+
+I have only included the large model library and the header file needed
+for the compilation. This module is very popular and you should be able
+to find it easily. Look on the programming site:
+
+							fpt://x2ftp.oulu.fi
+
+Also, I have used the following routines, which are either public domain
+or copyrighted but freely distributable:
+
+	Barnaby W. Falls' progress indicator class for TuboVision. It can be
+found as TPROGB.* in the TV section of the Borland's forum on CompuServe.
+I have compiled the source into PB-Lib itself.
+
+	David Baldwin's TCombo and TInputLong classes (with little adaptations).
+These are distributed in source form with his excellent Dialog Design v4.6
+program. Also available on the Borland's CompuServe forum, in the TurboVision
+file section. I have compiled these modules (modified) into PB-Lib itself.
+
+I have also adapted Borland's TChDirDialog source code to make the class
+which obtains a directory path. Only minor modifications were required. I
+have compiled the new class as TGetDirDialog in PB-Lib itself.
+

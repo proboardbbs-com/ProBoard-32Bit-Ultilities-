@@ -1,0 +1,199 @@
+To compile the overlay version of FileCFG, you will need to use the
+FileCFGO.Prj file. It defines the __OVERLAY constant and also sets
+all the necessary compiler options.
+
+You will need to get the overlay version of PB-Lib (all the three
+modules). If you do have the source, you will need to read the instructions
+that are provided in it in order to be able to build the correct version.
+
+Generally, the Build.Bat provided with PB-Lib can build all the necessary
+libraries for you. Use the following commands to generate the overlay
+versions:
+
+		build -o			; generate PBLIB_OV.LIB (PB-Lib)
+		build -o -c			; generate PBLCS_OV.LIB (Class libraries)
+		build -o -v			; generate PBVIS_OV.LIB (TurboVision add-ons)
+
+They will be placed in the correct %SILICON%\LIB directory. If you installed
+the source code in %SILICON%\SRC\FILECFG, then you do not have to make any
+modifications to the project files except adjusting the include directories.
+
+FileCFG compiles without any warnings or errors in both normal and overlay
+modes. This is with all warnings turned on (except the Superflous & with a
+function, which is necessary to prevent problems with TurboVision itself).
+
+Apart from the overlay versions of the PB-Lib modules, you will need an
+overlay version of TurboVision. You will need to have access to the source
+code (it came with Borland C++ 3.1 with Application Frameworks) and TASM.
+Of course, if you have BC++ 3.1 w/ AF, then you already have those and you
+need to go to the TurboVision source directory and type:
+
+					make -DNDEBUG -DOVERLAY
+
+This will build the overlay version. Note that this will replace the TV.LIB
+file in the .\LIB directory, so make sure you back it up first. I have
+included the full text of the Borland's own instructions on overlaying
+TurboVision. I followed them exactly and they do work. With FileCFG, the
+two new resulting modules are called TVOVL.LIB and TVNO.LIB for the overlaid
+modules and the interrupt handlers respectively.
+
+========================= Overlaying Turbo Vision ==========================
+
+BACKGROUND
+==========
+
+In order to create an overlaid Turbo Vision program, one must have the
+Turbo Vision Source code and a copy of Turbo Assembler (v2.5x, or above).
+If you have problems with the assembler running out of memory, download
+TI1331, which will explain how to run TASMX, the DPMI protected mode
+assembler, from the IDE or from BCC.
+
+
+OVERVIEW
+========
+
+1. Rebuild the Turbo Vision Library to include overlay support and move
+   certain non-overlayable object modules to a second library.
+
+2. Set up a project file for the overlaid program and make sure that all the
+   correct options are set for overlaid program, including -Vs and -B. If you
+   prefer using the command line tools, you can create an analogous Makefile.
+
+3. Add TV.LIB and the second library you created in step one, above, to the
+   project and mark TV.LIB as overlayable.
+
+
+REBUILDING FOR OVERLAYS
+=======================
+
+In order to use Turbo Vision in an overlaid program, TV.LIB must be rebuilt.
+Change directory to the Turbo Vision Source code directory (ex. C:\BC\TV\SRC)
+and run this command:
+
+                            MAKE -B -DOVERLAY
+
+This will generate a new copy of TV.LIB which can be overlayed. It will also
+create two .OBJ files, SYSINT.OBJ and TEVENT.OBJ. These two files contain
+code for TV's interrupt handlers and cannot be overlayed.  In addition,
+there are a few other OBJ files still in the library which cannot be
+overlaid either since they include code that could be called from Turbo
+Vision's critical error handler.  These can be extracted from the library
+with the following command:
+
+	TLIB TV.LIB -*SYSERR -*TSCREEN -*DRIVERS -*DRIVERS2
+				-*SWAPST -*TEVENT -*SYSINT
+
+Create a new library called TVNO.LIB that consists of the aforementioned OBJ
+files that should not be overlaid.  Use the following command to do this:
+
+	TLIB TVNO.LIB -+TEVENT -+SYSINT -+TSCREEN -+SYSERR
+				  -+DRIVERS -+DRIVERS2 -+SWAPST
+
+
+SETTING UP THE PROJECT
+======================
+
+Create a project file that includes all the source modules and libraries used
+by your program.
+
+First, go to Options|Application and select <Dos Overlay>.  Then sure to set
+the following options:
+
+     Options|Compiler|Code Generation : Large Model
+     Options|Compiler|Code Generation : Compile Via Assembler
+     Options|Compiler|C++ Options : Local Virtual Tables
+     Options|Linker|Libraries : Unmark Turbo Vision
+
+Of course if there are any other options needed for the project, such as
+<Word Alignment> or <Optimizations> set those at this time, as well as
+marking the appropriate modules in the project to be overlaid or not as
+desired.
+
+
+OVERLAYING TV.LIB
+=================
+
+Now, add TV.LIB and TVNO.LIB to the project.  In their respective local
+options screens, mark <Overlay This Module> for TV.LIB and leave it blank
+for TVNO.LIB.  It is imperative that TVNO.LIB not be overlaid.
+
+Now select <Compile | Build All> to build the program.
+
+
+COMMAND LINE EQUIVALENTS
+========================
+
+If using a Makefile and the command line tools, the following
+options for BCC are equivalent to the options listed in step 2:
+
+     -Y, -Yo        Compile for Overlays
+     -ml            Large Model
+     -B             Compile Via Assembler
+     -Vs            Local Virtual Tables
+
+Your command line will look something like this:
+
+     bcc -Vs -B -ml -Yo myfile.cpp -Yo- tvno.lib -Yo tv.lib
+
+
+IMPORTANT!!
+===========
+
+Be sure to use the same BC switches outlined in the makefile when
+compiling your source code to be overlayed with the new overlayed
+Turbo Vision library! (i.e. use the -Vs and -B switches  -  In
+the IDE use OPTIONS|COMPILER|C++ OPTIONS|LOCAL VIRTUAL TABLES
+and  OPTIONS|COMPILER|CODE GENERATION|COMPILE VIA ASSEMBLER ).
+
+
+TROUBLESHOOTING
+===============
+
+If the assembler runs out of memory when assembling one of the
+files built by the compiler, use TASMX, the protected mode
+assembler, instead.  Download TI1331 for instructions on how to
+set up the Assember Transfer item to call TASMX.
+
+If warning "No stub for fixup at SEGMENT:XXXXh in module MODULE"
+is generated, most likely not all modules in the project are
+being compiled with -B and -Vs, or that the Turbo Vision library
+was not compiled with overlay support.  Double check that the
+steps in this document have all been followed correctly and
+rebuild the program with <Compile | Build All>.
+
+
+INCREASING PERFOMANCE
+=====================
+
+To improve performance of an overlaid Turbo Vision application it
+may be helpful to increase the size of the global variable
+__ovrbuffer to 0x2000 or greater.  This will set up an 128K
+overlay buffer.
+
+
+EXAMPLE
+=======
+
+Here are explicit instructions for overlaying the TVFORMS program
+in TVISION\DEMOS.  These instructions assume that the Turbo
+Vision library has been recompiled for Overlay support as
+described above:
+
+     - Change directory to \BORLANDC\TVISION\DEMOS
+     - Run BC and open TVFORMS.PRJ as a project.
+     - Make these changes:
+
+		Options | Application : Choose DOS Overlaid.
+		Options | Compiler | Code generation : Reset to Large Model
+		Options | Compiler | Code generation : Select compile via Assembler
+		Options | Compiler | C++ options : Select Local Virtual Tables
+		Options | Linker | Libraries : Uncheck Turbo Vision
+
+     - Add TV.LIB and TVNO.LIB to the project file.
+     - In the project window, select TV.LIB and any other source
+       module you wish to overlay.  On each, select the name, type
+       <Ctrl-O> and mark <Overlay This Module> on the Local Menu
+       Dialog that appears.
+     - Do not overlay TVNO.LIB.
+     - Selecting <Compile | Build All> will now build an overlaid
+       version of TVFORMS.

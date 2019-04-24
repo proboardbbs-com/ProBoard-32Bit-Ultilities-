@@ -1,0 +1,34 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+
+What's new in FileCFG?
+----------------------
+
+File handling
+-------------
+	Now every time you read in the original configuration, FileCFG will
+	check for old backups and offer to remove them. You should answer
+	'Yes' if you want correct operation. The backups will be created each
+	time data is loaded (whenever you select 'Arrange' from the menu).
+	This way, it is ensured that FileCFG will operate on current files
+	only. When saving, a temporary file FILECFG.BKP will be created. It
+	should be removed by the program, but if you happen to find it in the
+	system directory, delete it (no harm).
+
+Multiple directories per area
+-----------------------------
+	Added support for FA_nnn.CTL files. In ProBoard you can specify
+	multiple directories per file area. The problem with the mechanism is
+	that it requires the control file names to match the area numbers. You
+	can easily see the mess that can be created when renumbering and
+	shuffling areas around. Now FileCFG will keep track of the control
+	files and will update both the file name and the entry in the file
+	path for the appropriate areas. You need to have the external control
+	files properly configured for this to work. If an area has a control
+	file specification, but no file actually exists, the area will not be
+	updated. Only areas with valid control files will be. As far as I
+	know, FileCFG is currently the only program that supports this
+	operation (PBDESK and PBMOVE don't).
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.

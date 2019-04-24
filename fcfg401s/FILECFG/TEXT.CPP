@@ -1,0 +1,133 @@
+/*
+ * FileCFG v4.0r1/Pro by Silicon Creations, Inc.
+ * Copyright (C) 1995-1996 Branislav L. Slantchev
+ * All Rights Reserved, All Wrongs Deserved!
+ *
+ * This file is released under the terms and conditions of the
+ * GNU General Public License (see the file 'Copying.Doc' for
+ * more information).
+ *
+ * The author can be contacted at 73023.262@compuserve.com
+ *
+ * Please, see Credits.Doc for credits and acknowledgements.
+ * Also, refer to Compile.Doc for compilation instructions.
+ *
+ * You need PB-Lib v2.0r1 (Full Release) with both the normal
+ * and overlay versions in order to be able to compile the
+ * source code. You also need TurboVision 1.03 with all the
+ * patches applied (see Patches.Doc for details) and recompiled
+ * in both the normal and overlay versions (see Overlay.Doc).
+*/
+const char *helpCtxStrings[] =
+{
+	"FileCFG Rules! Coded by The Eccentric (aka Branislav L. Slantchev)",
+	"Contents of the online Help System",
+	"Execute and external program (undefined topic)",
+    "Quit FileCFG and exit back to the command prompt",
+    "ProBoard file group and area configuration",
+	"System commands, shelling to the operating system",
+    "Swap the program out of memory and shell to DOS",
+    "Swap out and run ProCFG for complete maintenance",
+    "ProBoard message group and area configuration maintenance",
+    "Rearrange, edit and perform global changes on the file areas",
+    "Various message base configuration items",
+    "Access the online help system",
+    "Rearrange, edit and perform global changes on the file groups",
+    "Rearrange, edit and perform global changes on the message groups",
+    "Run external program as defined in SILICON.INI (if any)",
+    "Process maintenance commands in FILEUTIL.CTL (if any)",
+    "Process maintenance commands in MESGUTIL.CTL (if any)",
+    "Reindex the filebase (necessary after re-arranging)",
+    "Reindex the Hudson and JAM areas (no Squish or *.MSG)",
+    "Information on how to contact the author (me that is)",
+    "Various limitations of the program (and bugs, yuick!)",
+    "Very general installation and usage tips",
+    "Acknowledgemnts: where I say 'thanks' and 'I hate you!'",
+	"Show program version and copyright information",
+	"Change the AKA network address from list of available ones",
+	"Change the area name",
+	"This will cancel the current dialog box, changes lost",
+	"Perform global updates on list of tagged records",
+	"Change the current directory selection",
+    "Delete the currently highlighted item",
+    "Edit the currently highlited record (may be unavailable)",
+    "Set to 'Yes' if this area belongs to all groups",
+    "Choose the format for the date in the FILES.BBS listings",
+    "Choose a file (use arrow keys to navigate through the dialog)",
+    "Change the access flags for the file area",
+    "Set to 'Yes' if this is a free file area",
+    "Select a group this area belongs to (press Enter for list)",
+    "Change the access level required for this file area",
+    "Change the location of the listing file (press Enter to use dialogs)",
+    "Change the directory the files reside in (Enter to pop up dialog)",
+    "Set to 'Yes' if this is a CD-ROM file area",
+    "Set the number of files that can be downloaded from this area",
+    "Set the number of kilobytes that can be downloaded from this area",
+    "Set the minimum age required to access this area",
+    "Set to 'Yes' if files from this area are to appear in TOPFILES.A*",
+    "Search for a record by name (not case-sensitive)",
+    "Find the next occurence of text in record name",
+    "Global update of the AKA network address for the areas",
+    "Set or reset the 'All Groups' flag globally for tagged areas",
+    "Set or reset the CD-ROM flag for all tagged areas",
+    "Change the flag settings globally for tagged records",
+    "Change the 'Free' flag setting for all tagged file areas",
+    "Set the number of days to keep messages in tagged areas",
+    "Set number of days to keep received messages in tagged areas",
+    "Set globally the access level for all tagged records",
+    "Change the file listing drive and/or direcotry",
+    "Change the file directory drive and/or root where the file reside",
+    "Change the maximum number of files for each tagged area",
+    "Change the maximum kilbyte downloads for each tagged area",
+    "Change the maximum number of messages per are for tagged areas",
+    "Change the message base type for all tagged areas",
+    "Change the message base kind for all tagged areas",
+    "Change the name options for all tagged message areas",
+    "Change the message type for all tagged areas",
+    "Change the defaul origin line for all tagged areas",
+    "Change the Sysop flags for all tagged message areas",
+    "Change the Sysop level for all tagged message areas",
+    "Change the Sysop name for all tagged message areas",
+    "Set (or reset) the 'In tops' flag for all tagged areas",
+    "Change the write access flags for all tagged message areas",
+    "Change the write access level for all tagged message areas",
+	"Specify a number and jump to that record",
+	"Change the flag settings required to access this group",
+	"Change the level settings required to access this group",
+	"Change the name of this group",
+	"Display brief help on using the help system",
+	"Insert an empty record at the current position",
+	"Edit, move, sort and mess around with the records on the list",
+	"Change the network AKA address for this area, press Enter for list",
+	"Change the 'All Groups' flag for this message area",
+	"Change the descriptive name for this message area",
+	"Change the message base format (use with CAUTION!)",
+	"Change the message area EchoMail tag (if applicable)",
+	"Set the group this area belongs to (press Enter for a list)",
+	"Change the Hudson base board number (unknown purpose)",
+	"Change the number of days to keep messages in this area",
+	"Change the number of days to keep received messages in this area",
+	"Change the kind of the message area",
+	"Change the maximum number of messages allowed in this area",
+	"Enter the minimum age required to access this message area",
+	"Change the name options for this message area",
+	"Change the origin line for this area",
+	"Change the message path (or path and name) if applicable",
+	"Enter the tag to use for the QWK mail packets",
+	"Enter the number of the message area replies will go to",
+	"Enter the name of the person to be the Sysop of this area",
+	"Change the message area type",
+	"Move and group all tagged records after the current highlight",
+	"Accept the settings in this dialog box and close it",
+	"Pack records by removing all unused and empty ones",
+	"Change the flags required for reading messages in this area",
+	"Change the level required for reading messages in this area",
+	"Renumber records so they match the internal representation",
+	"Save all data to disk immediately",
+	"Move tagged records after the selection bar, sort the group too",
+	"Change the flags required for sysop access in this area",
+	"Change the level required for sysop access in this area",
+	"Change the flags required for writing messages in this area",
+	"Change the level required for writing messages in this area"
+};
+

@@ -1,0 +1,51 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+
+Note
+----
+	Backup your current file and message group files (MGROUPS.PB and
+	FGROUPS.PB). This version allows manipulation of the groups too!
+
+Functional changes
+------------------
+	Added file and message groups arranging and editing. You can rearrange,
+	insert and delete file and message groups freely. When you save the new
+	data, FileCFG will prompt you to update the group definitions in the
+	areas with the new values too. You don't have to worry about anything,
+	just select 'Yes' and your areas will automatically be updated to the
+	new group values. If you delete a group, all areas that belonged to it,
+	will have the group field set to 0. As far as I know, FileCFG is the
+	only one that supports group editing and auto-updates! You can also
+	change group level and/or flags globally.
+
+	Removed the 'Run ProCFG File/Message Area Editor' commands from the
+	menus. They are no longer needed since FileCFG allows editing of areas
+	and groups internally now. The 'Run ProCFG' command is still available
+	in the System menu, though.
+
+Cosmetic changes
+----------------
+	If for some reason FileCFG cannot find some of the files it needs in
+	the ProBoard directory (no groups, for example), the corresponsing
+	items on the menus will be disabled.
+
+	The flag selection now is more consistent with the TurboVision colors.
+	The background is now blue and the reverse background is green. Looks
+	a lot better.
+
+	Fixed 'External program' to read 'External programs' in the message
+	editing menu.
+
+	Renamed the 'File areas' menu to read 'Files'. This is now consistent
+	with the ability to manipulate not only areas but groups too. Did the
+	same to 'Message areas' which is now 'Messages'.
+
+Bugs and future plans
+---------------------
+	There's something weird: the backspace key is not recognized! :(
+
+	I will add the message area editor in the next version! How do
+	you like the features.
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.

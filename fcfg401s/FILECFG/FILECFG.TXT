@@ -1,0 +1,1158 @@
+.topic noContext=0, Contents
+ FileCFG/Pro Online Help System Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+ {Contact}                  {External programs:Extern}
+ {Usage}                    {Control files:FileCtl}
+ {Limits}                   {Reindexing:Index}
+ {Acknowledgements:Acks}
+
+.topic ExecProg,Exit,Files,System,Shell,ProCfg,Message,Maint,Mesg,Help,FileGroup,MesgGroup
+ Undefined Topic Ü
+  ßßßßßßßßßßßßßßßß
+ Help unavailable for this topic.
+
+.topic Extern
+ External Programs Ü
+  ßßßßßßßßßßßßßßßßßß
+
+Users can define the programs which should be installed in the File and
+Message menus as well as the text which should appear in the menus. To
+do this, use (or create) as plain text file called SILICON.INI in your
+ProBoard system directory. If you already have it (it is shared by several
+programs), find or create a section called [FileCFG]. The entries below
+show you the format the is expected as well as the keywords you need to
+use. The text that appears on the left of the equal sign should be copied
+verbatim, the text to the right is user-defined. Here are the setting I
+use (copied straight from my SILICON.INI):
+
+     [FileCFG]
+     Allfix=D:\SBIN\ALLFIX\ASETUP.EXE
+     AllfixMenu=A~l~lfix setup
+     FileMgr=D:\SBIN\FEBBS\FEBBS.EXE
+     FileMenu=File area ~m~anager
+     AMU=D:\SBIN\AMU\AMUCFG.EXE
+     AMUmenu=AMU ~c~onfiguration
+     InterEcho=D:\IM\IESETUP.EXE
+     IEmenu=InterEcho ~s~etup
+     BlueWave=D:\SBIN\BWAVE\BWSETUP.EXE
+     BWmenu=~B~lueWave setup
+
+As you can see, you need to specify the full path and file name of the
+command that needs to run (with the extension), and the text that is to
+appear on the menu. You do not have to enclose it in quotation marks. The
+letter which appears between the two tilde characters (~) will be the
+hotkey for the item and will be red on the menu.
+
+If FileCFG cannot find the programs when it initializes, the menu option
+will not be available and will be greyed out.
+
+.topic FileCtl, MesgCtl
+ Control Files Ü
+  ßßßßßßßßßßßßßß
+
+Both the file and message menus have a 'Process Control File' command on
+them. To use those, you need to create a FILEUTIL.CTL and MESGUTIL.CTL
+files in your FileCFG home directory (where the executable is). These are
+simple text files which list the commands to be executed one per line.
+You cannot have empty lines, but you can have comments which are denoted
+by the ';' character in column one. These are very useful if you have a lot
+of programs that reply on the area arrangement. If you do a lot of editing,
+you can run all necessary update programs from those files. Here's what
+my files look like:
+
+   ; This is a sample configuration file for FileCFG
+   ;
+   ; Note that you cannot have empty lines, you must use the ';' comment
+   ; character to separate lines. Each line that does not begin with a
+   ; semi-colon will be treated as a command-line. Note also that you must
+   ; give the full path and extension to the program (parameters are optional)
+   ;
+   ; Re-index the filebase and rewrite listings
+   D:\PB\PBUTIL.EXE FI
+   D:\PB\PBUTIL.EXE FC -R
+   ;
+   ; Update Allfix setup
+   D:\SBIN\ALLFIX\FCOMP.EXE 5 D:\PB
+   ;
+   ; Generate file lists
+   D:\SBIN\AMU\AMU386.EXE LISTS
+   ;
+   ; note that there are no empty lines. This is the last one.
+
+
+.topic Index, ReindexMsg
+ Reindexing Areas Ü
+  ßßßßßßßßßßßßßßßßß
+
+After you're through rearranging areas, it is necessary to reindex the
+file areas (and, optionally, the message areas). These commands will
+simply run PBUTIL with the correct command line switches to save you the
+manual labor of typing them in. Note that the message indexing works for
+Hudson and JAM areas only.
+
+.topic Contact
+ Contact Ü
+  ßßßßßßßß
+
+    Fidoúúúúúúúúúúúúúú1:383/47
+    SCiNîTúúúúúúúúúúúú751:430/2 and 751:430/1000
+    CompuServeúúúúúúúú73023,262
+    Internetúúúúúúúúúúsci@wtoc.net
+    http://www.wtoc.net/~sci (try this first!)
+    http://ourworld.compuserve.com/homepages/sci
+    FidoNet PROBOARD echo as Branislav Slantchev
+
+Phone support numbers:
+    BBS (and Fax)úúúúú(915) 949-4798
+    Voiceúúúúúúúúúúúúú(915) 947-5327
+
+Conventional snail-mail:
+    Branislav L. Slantchev
+    Silicon Creations, Inc.
+    1814 S.Pierce Str. #36
+    San Angelo, TX 76904
+    USA
+
+.topic Limits
+ Limitations Ü
+  ßßßßßßßßßßßß
+
+FileCFG does not support all 10,000 areas that ProBoard does. It currently
+will work with up to 5,000. If you have more than that, you are out of luck.
+With the memory limitations of DOS, there's nothing I can really do to
+make it work. If memory is still a problem, use the overlaid version which
+is available from the sample place you got this one.
+
+.topic Usage
+ Overview and Usage Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+Please refer to the README file for quick tips and COPYING for license.
+
+To ensure correct and hassle-less operation, make sure you follow these
+simple guidelines: ensure your PROBOARD environment points to your PB
+system directory (FileCFG will refuse to work without it), make backups
+for all the necessary files manually (FILECFG.PRO, FGROUPS.PB, MGROUPS.PB
+and MESSAGES.PB). Even though FileCFG does make .BAK copies each time it
+loads data, it is a good idea to do it yourself. I am not responsible for
+any data loss that might occur.
+
+.topic Acks
+ Acknowledgements Ü
+  ßßßßßßßßßßßßßßßßß
+
+This program would not be possible without the kind support of my beta
+testers. Thanks, guys and gals, you've been really great once again!
+
+Thanks to my girlfriend who puts up with me going to bed at 4:00a because
+of those stupid help files. I promise I will not write another program in
+the next few weeks! :-)
+
+This program uses SPAWNO v4.0 A EMS/XMS/DISK Swapping Library
+Copyright (C) 1990-1991 Ralf Brown. All Rights Reserved.
+
+It is also using the TurboVision v1.03 Application Frameworks from
+Borland, Intl. You will need the library as I cannot distribute it
+with my sources (without infringing Borland's copyrights on it.)
+
+Also, I used routines from David Baldwin and Barnaby Falls (these
+are noted in the source code) as well as some rip offs from the
+Borland's RTL library sources. As usual, creative ripping is good!
+
+.topic About
+ About Dialog Box Ü
+  ßßßßßßßßßßßßßßßßß
+
+       *******          * ***
+      *       ***      *  ****  *   *
+     *         **     *  *  ****   ***
+     **        *     *  **   **     *
+      ***           *  ***
+     ** ***        **   **        ***
+      *** ***      **   **         ***
+        *** ***    **   **          **
+          *** ***  **   **          **
+            ** *** **   **          **
+             ** **  **  **          **
+              * *    ** *      *    **
+    ***        *      ***     *     **
+   *  *********        *******      *** *
+  *     *****            ***         ***
+  *
+
+  Silicon Creations, Inc. (another bragbox)
+
+.topic AkaDlg
+ System Network Addresses (AKA) Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+'AKA = Also Known As' - network address setup for this system.
+
+Each networked system has its own unique address (or set of addresses)
+on the net. If it belongs to more than one net, this number grows. Each
+message area can be restricted to a particular net. This is the address
+you wish to use for this area. All messages posted in this area on your
+system will be stamped by ProBoard with this originating address. Make
+sure you select the correct address or it may confuse some tossers.
+
+.topic AreaName
+ File Area Name Ü
+  ßßßßßßßßßßßßßßß
+
+Choose a name for this file area. This name can be anything you want.
+I suggest you make it descriptive (not just 'Cool Utils').
+
+Hint: use prefixes to group areas. For example, if you belong to SCiNET
+and you receive files in a couple of areas, name them with 'SCiNET: ' as
+prefix. This way, you can sort the areas later and they will stay grouped,
+and users can easily identify areas too.
+
+.topic CancelButton
+ Cancel Ü
+  ßßßßßßß
+
+Pressing this button will cancel the current dialog. All changes you may
+have made will not be carried over. Pressing Escape usually does the same.
+
+.topic ChangeRecs
+ Global Record Update Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+
+This is a very powerful option and must be used with great care. You have
+to tag one or more records for this command to work. When you select global
+update, you will be presented with a menu from which you can choose which
+one setting to update. You cannot change more than one setting at a time.
+Depending on the selection, you will be prompted for the new value. There
+are a couple of different dialogs you may encounter while doing that:
+
+  (a) Text input (for directories, names, etc.)
+      This is the regular input.
+
+  (b) Numeric input (for digits, numbers).
+      Make sure you type the correct values.
+      Your input is not being validated at all here.
+
+  (c) Yes, No and Cancel dialogs
+      This may seem counter-intuitive at first.
+      Selecting 'Yes' will turn the option ON.
+      Selecting 'No' will turn the option OFF.
+      Selecting 'Cancel' will not change it.
+
+After the selection is made, you will be prompted whether you want to
+save the global settings. If you choose 'Yes', all tagged records will
+be updated immediately. Data is not verified, it will simply be dumped
+into the ProBoard configuration. This option is intended for experienced
+users only. Use with caution.
+
+.topic ChDir
+ Change Directory Ü
+  ßßßßßßßßßßßßßßßßß
+
+This dialog lets you select a directory. Use the tree to navigate through
+the drives and paths, or simply type the directory name in the input line
+above it. 'Revert' will restore you back to the original startup directory.
+You can also choose a directory from the pull-down history list. Choose
+'{OK:OKButton}' to accept the new directory name.
+
+.topic Delete
+ Delete Record Ü
+  ßßßßßßßßßßßßßß
+
+Delets the currently focused record (highlighted in the list window). Note
+that there will be no prompt before deleting it. Also note that this will
+cause the rest of the records to be be pulled up by one. This command does
+not work with tagged records (ignores them). This is done on purpose to
+prevent people from tagging all areas and then accidentally hitting delete.
+Note that pressing the 'Del' key accomplishes the same effect.
+
+ {Insert}
+ {Edit}
+ {Save}
+
+.topic Edit
+ Edit Current Record Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Edit the current record. This command will pop up a dialog box with the
+appropriate fields to edit. If you don't cancel the dialog, you will be
+prompted whether you want to update the record on disk. Choosing 'Yes'
+will immediately update the record.
+
+ {Insert}
+ {Delete}
+ {Save}
+
+.topic FileAllGroups
+ All Groups Ü
+  ßßßßßßßßßßß
+
+Toggles the 'all groups' flag for the file area. This flag lets you mark
+this area as globally belonging to all groups. Very useful with certain
+areas of special interest, like the local system file area with listings,
+rules and archived bulletins which are free for download. If an area is
+set as belonging to 'all groups', it will show up in all listings that
+involve group selection (provided the user has access to it).
+
+.topic FileDateFormat
+ Date Format for FILES.BBS Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Currently, ProBoard supports three different extended formats of the
+FILES.BBS listings. This option is ignored if the area is not marked
+as {CD-ROM:FileLocal} ('Copy Local' in ProCFG). Depending on where you
+are, the FILES.BBS can have different formats. Most utilities will
+write them in the American (MM/DD/YY) format and that is why this is
+the preferred setting here.
+
+.topic FileDialog
+ File Selection Dialog Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+
+This dialog lets you select a file from a list of files. You can navigate
+through the list using the arrow keys or speed searches (just start typing
+the name and the program will attempt to match a file). The directories
+are grouped at the end of the listing and are indicated by a backslash (\)
+after the name. The '..' indicates the parent directory, if any. You can
+use this dialog to change drives too, just type 'D:\*.*' in the input line,
+for example, to switch to the root directory of drive 'D'.
+
+.topic FileFlag
+ File Area Access Flags Ü
+  ßßßßßßßßßßßßßßßßßßßßßßß
+
+Setting particular flags lets you control access to the file area. Note
+that this is all or nothing type of deal. There is no 'view, but don't
+download' thing in native ProBoard. You can specify which flags should
+be present (those will appear in white) or which should not be present
+in the user flag list (those will appear on green background). The setup
+is exactly the same as in ProCFG so you should not have any problems.
+
+See also: {Level:FileLevel}
+
+.topic FileFree
+ File Area Free Ü
+  ßßßßßßßßßßßßßßß
+
+If you set this to 'Yes', all file downloads from this area will not be
+counted towards the user daily limits. Be careful with this option for
+large areas. Some users will hog the system downloading everything they
+can find once they figure out the area is free. I, for example, have the
+system listings and my programs for free download, but that's all.
+
+.topic FileGrpSel
+ File Area Group Selection Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Each file area can be defined as belonging to not more than four groups.
+When users select a certain group, only areas in this group will be shown.
+Pressing Enter on the input line will pop up a dialog box with a list of
+all currently defined groups. Simply select one from the list. You can also
+type in the number directly if you so prefer.
+
+.topic FileLevel
+ File Area Access Level Ü
+  ßßßßßßßßßßßßßßßßßßßßßßß
+
+This is where you set up the minimum access level required for this area
+to be made available. Note that if the user has a level equal to or higher
+than this one, they will be given access to the area.
+
+See also: {Flags:FileFlag}
+
+.topic FileList
+ File Area List Path Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Each file area has its own FILES.BBS (or compatible) file listing. This
+is usually located in the directory with the files but does not have to
+be there. It is advisable that you keep your listings named FILES.BBS and
+placed in the file area directories as there are too many utilities that
+will assume this.
+
+You need to specify the full path and name of the file. Press Enter on
+the input line to bring up a {file selection dialog:FileDialog}.
+
+If your area has mutlitple directories, this is the path to the master
+listing file which will be a concatenation of the individual listings.
+
+FileCFG fully supports the FA_nnn.CTL mechanism for specifying multiple
+directories per file area (refer to the ProBoard FAQ on my {WebSite:Contact}
+and will automatically update the names of the FA_nnn.CTL files when
+necessary.
+
+See also: {File Location:FileLoc}
+
+.topic FileLoc
+ File Area File Location Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßß
+
+This is the directory path where the files for this area are stored. Even
+though you can actually have mutliple directories per file area, it is
+not advisable to use the feature as there are not too many programs out
+there that support it. Pressing Enter on the input line will bring up a
+directory selection dialog box.
+
+See also: {File Listings:FileList}
+
+.topic FileLocal
+ Mark Area as CD-ROM Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+This field is called 'Copy Local' meaning that ProBoard will treat the area
+as slow access and copy the files to the local hard drive before letting the
+user download them. Please, refer to the ProBoard manual for the location
+of the destination directories.
+
+It is important that you set this to 'Yes' for your CD-ROM areas because
+the file listings there usually have the extended FILES.BBS format (with
+date and file size). Not only this will speed up the operation, but it
+will ensure correct file listings.
+
+See also: {Date format:FileDateFormat}
+
+.topic FileMaxFiles
+ Maximum Files to Download Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Limit the number of files that can be downloaded daily bu users from this
+area. Entering '0' in this field will disable this option. You can also use
+the {KB:FileMaxKb} restrictions.
+
+.topic FileMaxKb
+ Maximum Kilobytes for Area Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Limit the total number of kilobytes that can be downloaded from this area.
+Use this in conjuction with the {number limit:FileMaxFiles} to enforce
+certain restrictions. Entering '0' in this field disables this option.
+
+.topic FileMinAge
+ Minimum Age for Access Ü
+  ßßßßßßßßßßßßßßßßßßßßßßß
+
+This field is not editable with ProCFG and I am not sure ProBoard actually
+respects it. This number defines the minimum age requirement for an user
+to be able to access the files in the area. Entering '0' in this field will
+make the area accessible to all people regardless of age (they must still
+have the necessary {level:FileLevel} and {flags:FileFlag} though.
+
+.topic FileTops
+ File Top Downloads Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+ProBoard can generate listings with top downloaded files. If you want the
+files in this area to be included in those listings, leave this option to
+'Yes'. Setting it to 'No' will cause ProBoard not to consider any file from
+this area for a top list candidate. Very useful if you have areas with
+frequently downloaded files which are not suitable for top listings.
+
+.topic FindFirst
+ Search for Text Ü
+  ßßßßßßßßßßßßßßßß
+
+Scan the list of records and try to match the record name with the search
+text. The matching is not case-sensitive. When a match is located, the
+record will be focused in the list viewer. Use the {find next:FindNext}
+command to continue scanning from the current position.
+
+.topic FindNext
+ Find Next Ü
+  ßßßßßßßßßß
+
+You must use {find first:FindFirst} to initiate the search before you can
+use this command. It will continue the scan starting where a previous call
+to 'Find first' or 'Find next' left off. If a match is found, the record
+will be highlighted in the list viewer.
+
+.topic GlobAKA
+ Global Change of AKA Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+
+This command allows you to change the AKA address for all tagged areas.
+You can {select:AkaDlg} the address from the list you entered in ProBoard.
+
+.topic GlobAllGrps
+ Global Change All Groups Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Allows you to change the 'All Groups' settings globally. Selecting 'Yes'
+in the dialog box will set the flag to ON, 'No' turns it off, and Cancel
+will not make any changes. This works regardless of the current setting.
+
+.topic GlobCDROM
+ Global CD-ROM Areas Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Globally change the CD-ROM (Copy local) flag for the file areas. Selecting
+'Yes' will mark the areas as remote (CD-ROM), choosing 'No' will make them
+local (hard drive) and Cancel will not make any changes. This will update
+the flag regardless of the current setting.
+
+.topic GlobFlags
+ Global Flags Change Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Globally change the access flags. Regular and reverse flags are supported.
+To set a flag, type the letter (or number) that corresponds to it. To
+reverse it, type it again (reversing a flag means that the caller must
+not have this flag in order to get access).
+
+.topic GlobFree
+ Global Set as Free Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+Globally mark file area as free. An area marked as free lets the user
+download any files from it without subtracting from the current download
+limits. Be careful with this option as a lot of users are real bbs hogs.
+
+.topic GlobKillDays
+ Global Kill After Days Ü
+  ßßßßßßßßßßßßßßßßßßßßßßß
+
+ProBoard's maintenance utility (PBUTIL) can fully maintain your Hudson
+and/or JAM message bases. With this option, you can set up the number of
+days to keep messages in the areas. The utility will delete them when
+run if they are older than this number of days. I find it useful to have
+this number set between 10 and 21, depending on the message traffic and
+the interest of my callers. This option works globally and will modify
+all tagged areas.
+
+If you are using Squish or *.MSG, you are on your own. As far as I know,
+you will need to use their programs to do the maintenance and those do
+not use this setting.
+
+.topic GlobKillRecv
+ Global Kill Received After Days Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Globally set the number of days to keep received messages. All messages
+that have been read by the individuals they were addressed to, will be
+deleted after this number of days. A setting of 1 or 2 is generally
+enough here. This only works for the JAM and Hudson areas. Squish and
+Fido *.MSG users will have to use the configuration options of the
+respective programs.
+
+This option will change the setting for all tagged records.
+
+.topic GlobLevel
+ Global Access Level Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Change the minimum security level needed to access the particular group
+or area. Note that area security overrides group settings (if the level
+required for the area is higher than the one required for the group, the
+one for the area will be applied).
+
+This will let you change this setting for all tagged records.
+
+.topic GlobList
+ Global File List Location Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Change the drive and root directory for the file listing locations for
+the tagged file areas. You can type a drive letter only to change the
+drive and you can type the drive letter and a root directory to change
+those too. This is very useful when moving areas around physically. For
+example, if you had 'C:\COOL\FILES\LIST.BBS' as the original setting
+and you type 'D:\FILEBASE' in the dialog box, the new resulting path will
+be 'D:\FILEBASE\COOL\FILES\LIST.BBS'. You can change the drive letter only
+by typing 'D:' only, for example.
+
+.topic GlobLoc
+ Global File Location Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+
+This allows you to change the file location globally for all tagged areas.
+This is the directory where the files are. This option is very useful if
+you move the areas physically to a new drive or new root directory. You
+can change the drive and/or the drive and directory in one shot. If you
+changed the BBS file base drive from 'D' to 'E', you would enter 'E:' in
+the dialog box and this will update the areas correctly.
+
+.topic GlobMaxFiles
+ Global Max Files Ü
+  ßßßßßßßßßßßßßßßßß
+
+Change the maximum number of files allowed for download from the tagged
+areas. The user will not be able to download more than this number of
+files during the call. Setting this field to 0 (the usual situation) will
+disable the feature and allow unlimited (actually, limited by the security
+setup) downloads from the areas (the recommended setting).
+
+ {Max KBytes:GlobMaxKB}
+
+.topic GlobMaxKB
+ Global Max Kbytes Ü
+  ßßßßßßßßßßßßßßßßßß
+
+This option is very similar to the global {files:GlobMaxFiles} limit setup,
+but instead of file numbers, it works on file sizes. Specify the number of
+Kilobytes (Bytes / 1024) that the users can download from this area at one
+time. Setting this field to 0 will disable this option.
+
+ {Max files:GlobMaxFiles}
+
+.topic GlobMaxMsgs
+ Global Max Messages Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+This option lets you define the maximum number of messages allowed in the
+particular area. This works only for JAM and Hudson areas and will be
+enforced during the maintenance (purge option with PBUTIL). All excessive
+messages will be deleted to trim down the number. Even though JAM is very
+forgiving with respect to the number of messages per area, Hudson bases
+can become very flakey with large volumes of messages (the whole base is
+limited to about 16 Mb). I suggest you be conservative woth those numbers
+for the Hudson base.
+
+This will set the number for all tagged areas.
+
+.topic GlobMBase
+ Global Base Format Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+Change the format of all the tagged message areas. ProBoard supports four
+different formats: Hudson, JAM, Squish, and Fido *.MSG. Be very careful
+with this option as it may have side-effects that you have not expected.
+
+.topic GlobMKind
+ Global Message Kind Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Change the area kind for all tagged areas. Areas can be local, netmail,
+echomail and private echomail. Even though global operation is not very
+useful for this type of setting, I decided to throw it in as a bonus.
+
+.topic GlobMName
+ Global Area Name Options Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Change the area poster's name options for all tagged areas. The options
+include enforced real name, free alias, alias or real name, and alias
+only enforced. Again, this may not be very useful in global opreations.
+
+.topic GlobMType
+ Global Message Type Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+This selects the default status of the messages posted to these areas. The
+messages can be private, public, public and private (user chooses), and
+to-all (great for system announcements). Generally, netmail is private,
+echomail is public, and system messages are in to-all areas.
+
+.topic GlobOrigin
+ Global Origin Line Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+Change the default origin line for the range of tagged areas. If this
+field is left blank, the origin line from ProCFG will be used by ProBoard.
+Origin lines should be short and say something about your system (usually)
+and it is a good idea to have different origin lines depending on the
+conference (show off your creativity a little).
+
+.topic GlobSFlags
+ Global Sysop Flags Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+Set the sysop flags (and reverse flags) for all tagged message areas. If
+a user has the required sysop flags and level, the system will let them
+delete, export (and others) messages in the area. Careful with this one.
+
+ {Global Sysop level:GlobSLevel}
+
+.topic GlobSLevel
+ Global Sysop Level Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+This lets you define the sysop level for all tagged message areas. The
+sysop level is another aspect of the sysop access to message areas. Sysop
+access means maintenance options and other goodies. Careful with this one.
+
+ {Global Sysop flags:GlobSFlags}
+
+.topic GlobSysop
+ Global Sysop Name Ü
+  ßßßßßßßßßßßßßßßßßß
+
+Here you can change the name of the person considered a 'Sysop' for all the
+tagged message areas. All messages posted to 'Sysop' in those areas will be
+automatically posted to that person. If left blank, the real sysop will
+receive the messages. This is useful if you have CoSysops or persons that
+maintain the message areas themselves.
+
+.topic GlobTops
+ Global Show in Tops Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Set the 'Show in TOPFILES' flag for all tagged file areas. If this flag is
+set, files downloaded from the areas will appear in the topfiles listings
+(if they are indeed top!). If set to 'No', then the files will be ignored
+regardless of the number of downloads. Useful for certain things like areas
+with distributable files (nodelists) as your callers rarely have any special
+interest for those.
+
+.topic GlobWFlags
+ Global Write Flags Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+Specify the flags needed for the user to have (or not have) in order to be
+able to write messages in the tagged areas. You can use both the normal
+(required) and reverse (must not have them) flags. Great for restricting
+the Sysop and message areas.
+
+ {Global write level:GlobWLevel}
+
+.topic GlobWLevel
+ Global Write Level Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+Specify the level needed for the user to be able to post messages in all
+tagged areas. The user must also have the necessary access flags. Great
+for restricting the announcement areas so that users cannot write any
+announcements themselves. :-)
+
+ {Global write flags:GlobWFlags}
+
+.topic GotoNum
+ Goto Record Number Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+This command allows you to jump to a specific record number directly. Just
+type the number in the box provided. If found, the record will appear
+highlighted in the list viewer box. Note that actual numbers are used, and
+not the ones that may be visible on the screen. Choose '{Renumber}' to
+synchronize the numbers.
+
+.topic GroupFlags
+ Group Flags Ü
+  ßßßßßßßßßßßß
+
+The flags neccessary for users to access areas in this group. You can use
+both normal and reverse flags for more security. Note that the group flags
+can be overriden individually by each area.
+
+ {Group level:GroupLevel}
+
+.topic GroupLevel
+ Group Level Ü
+  ßßßßßßßßßßßß
+
+The minimum security level required in order for users to be able to access
+the areas in this group. Note that area level defintion will take precedence
+(if higher than this one) and thus you can have individual overrides.
+
+ {Group flags:GroupFlags}
+
+.topic GroupName
+ Group Name Ü
+  ßßßßßßßßßßß
+
+Choose a descriptive name for your users to see. This can be anything you
+might come up with. Don't assume callers always know what you are talking
+about (EFF might mean something to you, but not to them :-)
+
+BTW, I have a group called EFF and people ask me about it all the time! :)
+
+.topic HelpOnHelp
+ Help on help Ü
+  ßßßßßßßßßßßßß
+
+To use the help system, press F1 on any item of interest. Generally, you
+will see a single screen with a concise description. If there are any
+hypertext links (in different color), you can select them using either
+the arrow or tab (shift-tab) keys and jump to them by pressing Enter or
+clicking them with the mouse.
+
+.topic Insert
+ Insert a New Record Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+This command inserts an empty record at the current highlight position.
+Note that all areas following it will be shifted downwards. The record
+will be empty but can be edited as a normal record afterwards. You will
+need to manually {Save} the data before you can edit an individual record.
+
+.topic ListBox
+ Record List Viewer Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+This is the window where all the records are listed. Use the up and down
+arrows to move the selection bar, Home and End to move it to the top and
+bottom of the currently visible window, PageUp and PageDown to scroll the
+window contents and Ctrl+PageUp / Ctrl+PageDown to move to the beginning
+or end of the list.
+
+Space bar will toggle the tag of the current item and advance the selection
+bar down if possible. F5 tags all records for group processing. F6 untags
+all records and F7 toggles all tags (the tags will be cleared and the ones
+that were not tagged will be).
+
+You can use the mouse to select an item by clicking on it with the left
+button. Advanced dragging is available with the right button: just place
+the selection bar on the record you want to drag and then, press and hold
+the right button, and drag the record up and down. You can quickly swap
+two records that are both visible in the list by selecting the first with
+the left button and then clicking the right button on the other one.
+
+You can also select a range of areas by selecting the first one and then
+holding down the Shift key and clicking with the left mouse button. This
+will select the range of records between the clicked one and the old one.
+If you use Control+left-click, the effect is the same as pressing Space.
+
+.topic MesgAka
+ Message AKA Address Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Select the system network address to use for this area. All messages that
+are posted on your system in this area will be stamped with this identifying
+address. Generally, you would use the address for the network this area
+belongs to. You may press Enter to use a pop-up list of all the addressed
+you have defined in ProCFG.
+
+ {AKA Dialog:AkaDlg}
+
+.topic MesgAllGroups
+ Area Belongs to All Groups Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+If you select 'Yes', then the area will be listed always when a user chooses
+to use the group option. This makes the area visible regardless of the
+group selected. This is generally useful for local system areas that you
+want your users to see no matter what.
+
+ {Groups:MesgGroupNum}
+
+.topic MesgAreaName
+ Message Area Name Ü
+  ßßßßßßßßßßßßßßßßßß
+
+This is the (hopefully informative) name you choose for this message area.
+This can be anything you want and it is recommended that you put some
+thought in the process of assigning names. You can group areas by name by
+using a common prefix, say [SCiNET] for all message areas from SCiNET. This
+way users can tell what they are looking at, and this way FileCFG will sort
+the areas and keep them together.
+
+.topic MesgBase
+ Message Base Format Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Choose the message base format for this area. Hints: use Fido *.MSG of this
+is going to be a NetMail area. Use Hudson for the areas local to your BBS,
+like System Announcements. Use Squish or/and JAM for the rest of the BBS.
+Please refer to the ProBoard FAQ available at my {WebSite:Contact} for more
+information and suggestions about this topic.
+
+ {Kind:MesgKind}
+ {Type:MesgType}
+ {Name:MesgName}
+
+.topic MesgEcho
+ Message Area Echo Tag Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+
+Each echo area has a unique identifier called a tag which is assigned by
+the people that create the echo. You cannot freely choose a tag, you must
+use the official one from the EchoList (this list should be avialble from
+your Uplink upon request or by sending a %QUERY message to AreaMgr). The
+name is not case-sensitive, but it is customary to use upper-case in this
+field. This field might not be the same as the {QWK:MesgQwk} entry.
+
+.topic MesgGroupNum
+ Message Area Groups Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Each message area can belong to zero or more (up to four) message groups.
+Groups are used for organizing areas together in some logical order, like
+all areas dealing with programming might go in a separate group and all
+areas for a certain network might go to another. Pressing Enter in this
+field will pop up a list will all currently defined groups, you can choose
+one of them.
+
+ {All Groups:MesgAllGroups}
+
+.topic MesgHudson
+ Hudson Area Number Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+The purpose of this field is unclear, it seems to be always set to 0. I
+suggest you don't mess around with it unless you figure out what purpose
+it serves. Maybe Philippe will tell us one day?
+
+.topic MesgKillDays
+ Kill After Days Ü
+  ßßßßßßßßßßßßßßßß
+
+This sets the number of days to keep messages in this area. Messages older
+than this number will be purged during maintenance. Note that this only
+works with Hudson and JAM areas for which PBUTIL is used to do all the
+necessary work. As far as I know, Fido *.MSG and Squish users must use
+the confgurations for their particular programs. A good setting here
+depends on the particular area, with values from 7 to 21 not uncommon.
+
+ {Kill received:MesgKillRecv}
+ {Maximum messages:MesgMax}
+
+.topic MesgKillRecv
+ Kill Received After Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+This option is similar to {Kill Messages:MesgKillDays} but it only applies
+to messages that have been received by the person they were for. It is not
+usually necessary to keep those around for more than a couple of days.
+
+ {Maximum messages:MesgMax}
+ {Days to keep:MesgKillDays}
+
+.topic MesgKind
+ Message Area Kind Ü
+  ßßßßßßßßßßßßßßßßßß
+
+Each message area can be one of four kinds: local (messages are only to
+and from this system and they never get out to other BBS'), netmail (direct
+contact with almost all other BBS' in the net(s), good for Sysops, not
+generally good to let callers use), echomail (all FidoNet and compatible
+message transfer systems use this), and private echomail (this is the same
+as echomail, except private messages are allowed: not a good idea for the
+public echoes, and generally frowned upon by many).
+
+ {Type:MesgType}
+ {Base:MesgBase}
+ {Name:MesgName}
+
+.topic MesgMax
+ Maximum Messages Ü
+  ßßßßßßßßßßßßßßßßß
+
+Maximum amount of messages to keep in this area at any one time. Note that
+this will not be enforced until maintenance runs with the purging option.
+This setting only works for Hudson and JAM areas for which PBUTIL is used.
+Squish and Fido *.MSG users should refer to their respective utilities.
+
+ {Days to keep:MesgKillDays}
+ {Kill received:MesgKillRecv}
+
+.topic MesgMinAge
+ Minimum Age Ü
+  ßßßßßßßßßßßß
+
+This field is not available in ProCFG and (probably) defines the minimum
+age required to access a particular message area. I don't know if ProBoard
+respects it or not, but if it does, this can be very useful for adult
+systems with validated callers.
+
+.topic MesgName
+ Message Name Options Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+
+Each message area has certain name options that lets the Sysop control how
+messages get posted. Users can be forced to use their real name, their
+own alias, choose a free alias, or choose between their name and alias.
+Generally, the FidoNet echoes do not like aliases, so the echo areas should
+be set to 'Real Names Only'. In an alias-only system, you would want all
+local messages to be posted under an alias (certain echoes, like FLAME
+also lean towards this), so you would set it to 'Fixed Alias'. If you want
+to have even more fun, select 'Free Alias' which would let users choose
+an alias each time they post a message. If you want to let the users choose
+between their name and their alias, set this area to 'Real Name  or Fixed
+Alias'. Thus, each time they post a message, they will be prompted if they
+want to use their alias instead of the real name.
+
+ {Type:MesgType}
+ {Kind:MesgKind}
+ {Base:MesgBase}
+
+.topic MesgOrigin
+ Message Origin	Line Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+Each message area can have its own distinct origin line (show your creativity
+here). It's a good idea to have topical origin lines with regards to the
+individual area. For good ideas on origin lines, see the TAGLINES FidoNet
+echo. If this is left undefined, the defaul origin line from ProCFG will
+be used instead. Do not append your network address here, it is added by
+ProBoard automatically.
+
+.topic MesgPath
+ Message Area Path Ü
+  ßßßßßßßßßßßßßßßßßß
+
+This field depends on the type of {message base:MesgBase} used. For Hudson,
+leave this field blank (the Messagebase path in ProCFG will be used). This
+is because all Hudson areas share the same set of files. For Squish and JAM,
+type the directory and the root file name (no extension) for the area. The
+two use a separate set of files with the same name and different extensions
+to manage the area. For Fido *.MSG, type a directory name only. This format
+uses one file per message to store the messages and only requires the name
+of the directory.
+
+.topic MesgQwk
+ Message QWK Tag Ü
+  ßßßßßßßßßßßßßßßß
+
+QWK-compatible software as well as some offline mail doors like BlueWave
+require this field to be set to some unique string for identifying
+purposes. Note that this field is not the same as the {Echo Tag:MesgEcho}
+and should be set separately. Unlike the latter, this one is defined by
+you and only works for your system. I usually type the EchoMail tag in
+this field because those are unique already. If it's too long, I just
+truncate it. Use of all uppercase here is customary.
+
+.topic MesgReply
+ Reply Board Number Ü
+  ßßßßßßßßßßßßßßßßßßß
+
+This is the number of the message area where all replies will be posted
+to instead of this one. This is great if you have a To-Sysop area and you
+want your replies to be posted in a world-accessible area. Simply give
+the area number here. Note that 0 in this field means you want messages
+to be posted to the same area (default), you do not need to give the area
+number in the reply field in this case.
+
+FileCFG keeps track of those numbers and if you decide to move areas
+around, it will automatically adjust those numbers for you to match the
+new areas.
+
+.topic MesgSysop
+ Area Sysop Name Ü
+  ßßßßßßßßßßßßßßßß
+
+Users can post messages addressed to 'Sysop'. If you want someone else to
+receive those (Co-Sysop or the person maintaining the echo), type the name
+in this field. Leave blank for real sysop (default).
+
+.topic MesgType
+ Message Area Type Ü
+  ßßßßßßßßßßßßßßßßßß
+
+Message areas can be private (users can only see messages addressed to
+them), public only (users cannot post private messages there), private
+or public (users can choose what type of message to post) or 'To-All'.
+The first is generally useful for local private areas. The next one is
+good for 'Message to Sysop' which can be made public so that other users
+benefit from the information or private if it's for the Sysop only. The
+third one, public only, is good for FidoNet echomail areas. The last
+one (and often overlooked) is the To-All type which lets you post mail
+to all users (kind of). They will see the messages posted in this area
+in their new mail scan.
+
+ {Name:MesgName}
+ {Kind:MesgKind}
+ {Base:MesgBase}
+
+.topic Move
+ Move Tagged Records Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+You need to have tagged one or more records for this command to work. It
+will simply move all tagged areas and group them right after the selection
+bar. The empty areas that will be generated will be removed. Use the
+{Renumber} command to fix the display of the area numbers if you want.
+
+ {Sort}
+
+.topic OKButton
+ OK Button Ü
+  ßßßßßßßßßß
+
+Accept the settings in the current dialog box.
+
+.topic Pack
+ Pack Records Ü
+  ßßßßßßßßßßßßß
+
+Packing means removing empty entries from the list. This operation will
+remove all empty records. It is not reversible and should be used with
+care. That's why you will be prompted once again if you want to do it.
+
+.topic ReadFlags
+ Read Flags Ü
+  ßßßßßßßßßßß
+
+The security flags required for the user to have (or not have) in order
+to be able to read messages in this area.
+
+ {Read level:ReadLevel}
+ {Write flags:WriteFlags}
+ {Sysop flags:SysopFlags}
+
+.topic ReadLevel
+ Read Level Ü
+  ßßßßßßßßßßß
+
+The minimum level required for user to have in order to read messages in
+this area.
+
+ {Read flags:ReadFlags}
+ {Write level:WriteLevel}
+ {Sysop level:SysopLevel}
+
+.topic Renumber
+ Renumber Records Ü
+  ßßßßßßßßßßßßßßßßß
+
+When moving areas around, FileCFG does not automatically adjust the numbers
+for you. This is done so you can verify correct operation. Once done, choose
+this command to synchronize the internal numbers with the display. Note that
+this command does no saving of the data, it simply matches the numbers in
+memory with the numbers you see.
+
+.topic Save
+ Save Ü
+  ßßßßß
+
+Save all data to disk. It might be necessary to use this after inserting
+new empty records and before editing any record.
+
+.topic Sort
+ Move and Sort Ü
+  ßßßßßßßßßßßßßß
+
+This works exactly like the {Move} command except it will also sort the
+records by name when grouping them together.
+
+.topic SysopFlags
+ Sysop Flags Ü
+  ßßßßßßßßßßßß
+
+Flags required for Sysop access to this message area. Sysops can do a lot
+more than general users. Messages can be deleted, exported, and forwarded.
+
+ {Sysop level:SysopLevel}
+ {Read flags:ReadFlags}
+ {Write flags:WriteFlags}
+
+.topic SysopLevel
+ Sysop Level Ü
+  ßßßßßßßßßßßß
+
+The level required for Sysop access to this area. Again, this is a very
+powerful feature, don't let a lot of your users have access to it.
+
+ {Sysop flags:SysopFlags}
+ {Read level:ReadLevel}
+ {Write level:WriteLevel}
+
+.topic WriteFlags
+ Write Flags Ü
+  ßßßßßßßßßßßß
+
+Flags required for user to have (or not have) in order to be able to write
+messages in this area. Additional control is available via the
+{level:WriteLevel} setting.
+
+ {Read level:ReadLevel}
+ {Sysop level:SysopLevel}
+
+.topic WriteLevel
+ Write Level Ü
+  ßßßßßßßßßßßß
+
+Minimum level a user has to have in order to be able to write to this area.
+This should be used in conjunction with {flags:WriteFlags} for additional
+control if you wish.
+
+ {Write flags:WriteFlags}
+ {Read flags:ReadFlags}
+ {Sysop flags:SysopFlags}

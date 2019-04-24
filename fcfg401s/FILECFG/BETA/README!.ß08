@@ -1,0 +1,30 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+
+
+Functional changes
+------------------
+	Now when you press enter on the group selection in the individual
+	file area editor, you will get a list of all currently defined
+	groups where and you can select from this list. This is a lot
+	easier than remembering all those numbers. :-)
+
+	By the way, the minAge field in the file area editor is not
+	available in ProCFG! I am not sure ProBoard respects it, but
+	it is in the file area definition, so I decided to include it.
+
+Cosmetic changes
+----------------
+	Changed the drop-indicator to a big arrow (does it look better?).
+	Now enter drops down the selection boxes instead of down arrow.
+	This makes it a lot easier to navigate through the dialog box.
+
+Bug and future plans
+--------------------
+	There's something weird: the backspace key is not recognized! :(
+
+	I will add the message area editor in the next version! How do
+	you like the features.
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.

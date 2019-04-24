@@ -1,0 +1,1675 @@
+This is a list of all patches that need to be applied to TurboVision's
+source code before you recompile to use it with FileCFG. Note than none
+of the changes are forced by FileCFG or required. These are various bug
+fixes that people accumulated over the years. I have included the full
+text of the TVBUGS.CPP as well as SYSINT.DOC files for your convenience.
+
+-------------------------- TVBUGS.CPP --------------------------
+
+             Borland Turbo Vision (C++) Bug/Enhancement List
+
+
+Last Updated:  see section 'CHRONOLOGICAL INDEX OF CHANGES TO THIS DOCUMENT'
+
+Maintained by: Marc Stern
+               Internet:    stern@mble.philips.be
+               compuserve:  >INTERNET:stern@mble.philips.be
+
+
+
+*** This list is C++ TurboVision (TV) specific.
+For a Pascal specific buglist, see the file  \turbo-vision\pascal\tvbugs.pas
+maintained by Brad Williams (bwilliams@marvin.ag.uidaho.edu) on the  TurbVis
+ftp site vtucs.cc.vt.edu. All bugs and fixes presented have  been  discussed
+on the listserv TurbVis and Compuserve. If you  want  to  join  the  mailing
+list, send a message to listserv@vtvm1.cc.vt.edu containing the line  SIGNON
+TURBOVIS.
+
+These fixes are meant to be applied to Turbo Vision 1.03, the  version  that
+was shipped with Borland C++ 3.1 and Application Frameworks. You  must  have
+the source code to Turbo Vision in order to implement these fixes.
+
+
+This list contains bug fixes and  enhancements  to  the  TV  sources.  These
+enhancements are obviously subjective and rely most of the time on  personal
+feelings of the posters about the look and feel of their applications.
+
+
+*** This is an unofficial list and is not a substitute for
+*** Borland Technical or Customer Support which can be reached at
+*** 800-331-0877 for registered Borland product owners.  Borland
+*** customer on-line service can be reached at
+***
+***           customer-support@borland.com (internet)
+***
+*** Online technical support is not available.  Borland's internet
+*** address for reporting bugs is
+***
+***               bugs@borland.com (internet)
+
+All submissions determined to be "true" bugs will be forwarded  to  Borland.
+The maintainer of this list, the authors of bug fixes, the TurbVis  listserv
+and the ftp site are not responsible for the reliability of any  information
+presented in this document or consequences that may result from their use.
+
+*** Always make a backup of the source code file under a new name
+*** prior making any changes to the original file.
+
+Send all comments about bugs you have discovered  and  any  patches  to  the
+maintainer of this list or to the TurbVis listserv  for  discussion.  Please
+include a description of the problem you are  having,  a  small  section  of
+source code which will duplicate the  problem  when  compiled/run,  and  all
+suggestions for improvement of current patches are appreciated.
+
+
+How to Use This List
+--------------------
+At the beginning of this list is  an  index  of  new  problems/questions  or
+changes to  old  problems/enhancements/questions  in  reverse  chronological
+order. This facilitates quick review for changes  from  previous  additions.
+Following is the list of problems/enhancements/questions about bugs  in  TV.
+They are discussed and source code patches referenced where  available.  All
+source code patches in this file are placed at the end in  alphabetic  order
+according to the reference name. Reference name is usually a  function  name
+or a object::function name, but it can be a general topic name such as Help,
+System Error Messages,...
+
+Example: Help
+         MessageBox
+         System Error Messages
+         TInputLine::handleEvent
+         TParamText::setData
+         TWindow::handleEvent
+
+If extensive files are required, the  individual  file  will  be  referenced
+under the appropriate problem/question.
+
+There are two possible methods for searching this document, by  topic  under
+the  PROBLEMS  /  ENHANCEMENTS  /  QUESTIONS  section  or  by  function  (or
+object::method) name under the PATCHES section. All PROBLEMS /  ENHANCEMENTS
+/ QUESTIONS and PATCHES  are  cross-referenced.  If  you  do  not  find  the
+topic/patch in one list, check  the  other.  If  you  still  cannot  find  a
+solution look at the FAQ (TVCPP.FAQ) posted  at  this  site.  If  you  still
+cannot determine a solution to your problem, post a message to the  listserv
+TurbVis.
+
+---------------------------------------------------------------
+       CHRONOLOGICAL INDEX OF CHANGES TO THIS DOCUMENT
+---------------------------------------------------------------
+15 february 94
+
+   HelpBase - 1
+   Language
+   TFileDialog - 3
+   TFileList - 1
+   TInputLine - 2
+   TNSCollection - 1
+   TSortedListBox - 1
+   TSItem - 1
+
+
+4 january 94
+
+   TPalette - 1
+
+
+20 december 93
+
+   TCluster - 1
+   Help - 6
+   TStringList - 1
+
+
+24 september 93
+
+   MessageBox - 5
+   TParamText - 3
+
+
+7 september 93
+
+   Help - 5
+   Streams - 1
+   TButton - 1
+
+
+27 july 1993
+
+   Help - 3, 4
+   Streams - 1
+   System Error Messages - 1 (Correction)
+   TCollection - 1
+   TDialog - 1 (Correction)
+   TFileDialog - 2
+
+
+15 july 1993
+
+   TGroup - 2
+   TParamText - 2
+   performance - 1
+   overlay - 1
+
+
+18 june 1993
+
+   TDialog - 1
+   TParamText - 2
+
+
+10 june 1993
+
+   MessageBox - 4
+   TChDirDialog - 1
+   TMenuView - 2
+   TStaticText - 1
+
+
+28 may 1993
+
+   Help - 2 (Correction)
+   TGroup - 1
+   TMenuView - 1
+   TView - 1 (Correction)
+   min/max - 1
+
+
+25 may 1993
+
+   Selection - 2
+   TDirCollection - 1
+   TFileDialog - 1
+   TListViewer - 1, 2
+   TResourceFile - 1
+   TView - 1
+   TWindow - 2
+
+
+5 may 93 - First edition of this list
+
+   Help - 1, 2
+   MessageBox - 1, 2, 3
+   TEditor - 1
+   TGroup - 1
+   TInputLine - 1
+   TParamText - 1
+   TWindow - 1
+
+---------------------------------------------------------------
+                   PROBLEMS / ENHANCEMENTS / QUESTIONS
+---------------------------------------------------------------
+
+Help
+----
+
+1. Problem - Compilation error when using streams with help.
+   Patch: see Help-1
+
+2. Problem - Highlighted items no more displayed in highlight when scrolling
+             in a help window longer than one screen.
+   Patch: see Help-2
+
+3. Problem - Shrinking the help window horizontally causes text at  the  end
+             of the help message to become unreachable  (assuming  the  help
+             text has more lines than  the  number  of  window  lines).  The
+             problem is virtual  function  changeBounds  never  gets  called
+             because  its  declaration  doesn't   match   the   base   class
+             declaration.
+   Patch: see Help-3
+
+4. Problem - Word wrap  is  erratic  for  characters  above  0x7f  (such  as
+             non-English letters). This is due to sign  extension  when  the
+             compiler converts from a signed char to an  int.  For  example,
+             0x81 gets converted to 0x8001, causing isspace  to  index  into
+             garbage.
+   Patch: see Help-4
+
+5. Problem - The THelpWindow class should function both as  a  modal  and  a
+             modeless window. However, it crashes if inserted as a  modeless
+             window.
+   Patch: see Help-5
+
+6. Problem - If  a  topic  link  is  longer  than  the  help  window  it  is
+             word-wrapped but only the first line is highlited. The  drawing
+             code relies on help topics to occupy one line only, so the  easiest
+             way to fix this would be to not word-wrap topic links.
+             Patch: see Help-6
+
+
+HelpBase
+--------
+
+1. Problem - Compilation warning in HELPBASE.CPP.
+             A function returns the address of a local variable.
+   Patch: see HelpBase-1
+
+
+Language:
+--------
+
+To adapt TV for multiple language support, see files TLANG.CPP &  TLANG.DOC.
+These should be located at the same place you found this list in  a  package
+called TVTOOLS ( general-purpose Turbo-Vision Tools:  library,  sources  and
+documentation - all is free).
+
+
+
+MessageBox
+----------
+
+1. Problem - Strange effects, memory garbage
+   Patch: see MessageBox-1
+
+2. Enhancement - Automatically adapt box size to message length
+   Patch: see MessageBox-2
+
+3. Enhancement - Automatically center 'OK/Cancel' buttons
+   Patch: see MessageBox-3
+
+4. See  TStaticText - 1
+
+5. Problem - If a messageBox is opened while a submenu is open  (because  it
+             is opened by an external event or in the idle() function),  the
+             messageBox will be under the submenu.
+   Patch: see MessageBox-5
+
+
+min/max
+-------
+
+1. Problem - error when using min/max with different type variables than int
+             (like ushort).
+   Patch: see min/max-1
+
+
+Overlay
+-------
+
+1. Problem - Turbo Vision cannot be overlayed.
+   Patch: see compilation
+
+
+Performance
+-----------
+
+1. Problem - Turbo Vision is  very  slow,  much  slower  that  the  previous
+             version because snow checking was inadvertently  turned  on  by
+             default and because the new operator  that  is  in  TV.LIB  has
+             debugging code compiled in with it.
+   Patch: see performance-1, compilation
+
+
+Selection
+---------
+
+1. Problem (feature?) - When a control is unselectable, it can be selected
+                        by selection its associated label.
+   Patch: see Selection-1
+
+
+Streams
+-------
+
+1. Problem - If you use either (or both) TCheckBoxes or  TRadioButtons  with
+             streams  your  program  will  crash  with   "Abnormal   program
+             termination" message.
+   Patch: see Streams-1
+
+
+System Error Messages
+---------------------
+
+1. Problem - Wrong system error messages.
+             Some errors not correctly handled (network errors,...).
+             Crash when you try to access drive B: on a one drive PC.
+             Ask two confirmation instead of one when hitting ESC key.
+   Patch: See System-1
+
+
+TButton
+-------
+
+1. Problem - When a command that is bound  to  a  button  is  disabled,  you
+             cannot access that button anymore. However, if that button  has
+             the flag cmDefault it will be activated if  you  hit  return  -
+             even though it is disabled
+   Patch: See TButton-1
+
+
+TCluster
+--------
+
+1. Problem - When a radiobutton or a checkbox is disabled, you cannot access
+             that button anymore. However,  you  can  change  the  selection
+             with the mouse or the hot-keys.
+   Patch: See TCluster-1
+
+
+TChDirDialog
+------------
+
+1. Problem - shutdown not performed correctly.
+   Patch: See TChDirDialog-1
+
+
+TCollection
+-----------
+
+1. Problem - shutdown not performed correctly.
+   Patch: See TCollection-1
+
+
+TDialog
+-------
+
+1. Problem - When inserting a  dialog  box  into  another  dialog  box,  the
+             palettes are all messed up (i.e. flashing red & white). This is
+             because  the  getPalette  system  uses   multiple   levels   of
+             indirection to find a color. That is, each  getPalette  routine
+             is supposed to return a  palette  which  indexes  it's  owner's
+             palette until the buck finally stops  and  a  "real"  color  is
+             selected. If you're indexing a palette with  itself  you're  in
+             trouble. The  good  news  is  that  mapColor(),  which  is  the
+             function  that  actually  translates  palettes,   will   ignore
+             palettes that are empty. Patch:
+   See TDialog-1
+
+
+TDirCollection
+--------------
+
+1. Problem - If current drive is invalid (no floppy, network disconnected,...)
+             when trying to change directory (TChDirDialog), after hitting
+             Escape twice, the directory field on screen contains garbage.
+   Patch: See TDirCollection-1
+
+
+TEditor
+-------
+
+1. Problem - Fails sometimes to find next word
+   Patch: see TEditor-1
+
+
+TFileDialog
+-----------
+
+1. Problem - error in validation :
+             cmValid is not checked in base class TDialog
+   Patch: See TFileDialog-1
+
+2. Problem - Bad handling of characters  above  0x7f  (such  as  non-English
+             letters) in filenames. This is due to sign extension  when  the
+             compiler converts from a signed char to an  int.  For  example,
+             0x81 gets converted to 0x8001, causing isspace  to  index  into
+             garbage.
+   Patch: See TFileDialog-2
+
+3. Problem - when fdNoLoadDir flag is specified, the  directory  info  panel
+             displays garbage.
+   Patch:
+   See TFileDialog-3
+
+
+TFileList
+---------
+
+1. Problem - When you enter into a directory that has a name shorter than  3
+             characters, ".." is not in the list.
+   Patch: See TFileList-1
+
+
+
+TGroup
+-------
+
+1. Enhancement - Check if focus has actually been released
+                 (if disabled in a derived class for example).
+   Patch: See TGroup-1
+
+
+2. Problem - If the first element of a dialog is hidden or unselectable  and
+              is  selected  by  the  software  (TView.select),  the  program
+              crashes when closing the dialog. It is probably a bad idea  to
+              select a hidden or unselectable view, but if you  really  want
+              to do this, see the patch.
+   Patch: See TGroup-2
+
+
+TInputLine
+----------
+
+1. Problem - In overwrite mode:
+             Selection is not deleted when typing a new character At the end
+             of the line, strange characters may be added.
+   Patch: see TinputLine-1
+
+
+2. Problem - Unnecessary scrolling when the length of the  data  is  exactly
+             equal to maxLen.
+   Patch: see TinputLine-2
+
+
+TListViewer
+-----------
+
+1. Problem - If a TListViewer has no scrollbar, the view is never redrawed.
+   Patch: See TListViewer-1
+
+
+2. Problem - Double-click in a TListViewer does not select the item.
+   Patch: See TListViewer-2
+
+
+TMenuView
+---------
+
+1. Problem - In a menu, if you go onto a  disabled  entry,  hit  Enter  then
+             Escape, the action will be executed.
+   Patch: See TMenuView-1
+
+2. Problem - If no menu (NULL pointer), the system crashes.
+   Patch: See TMenuView-2
+
+
+TNSCollection
+-------------
+
+1. Problem - shutdown not performed correctly.
+   Patch: See TNSCollection-1
+
+
+TPalette
+--------
+
+1. Problem - Assigning a palette to another one is buggy.
+             Same problem with copy constructor.
+   Patch: see TPalette-1
+
+
+TParamText
+----------
+
+1. Problem - Displays garbage with format where sizeof() != 4
+   Patch: see TParamText-1
+
+2. Problem - Displays garbage most of the time.
+             The problem comes from the RTL function vsprintf() which works
+             only with a parameter list on the stack (i.e., variables local
+             to function).
+   Patch: see TParamText-2
+
+
+3. Problem - inside a DialogBox, setData() &  getData()  seems  to  mess  up
+             when using TParamText.
+   Work-around: The problem comes from the function dataSize() which assumes
+                that all arguments are 4 bytes long. This is not the case  -
+                pointers are 4 bytes  long,  long  integers  also  and  both
+                (short) integers and characters are casted to 4 bytes  (that
+                means that you have  to  use  'long'  instead  of  'int'  or
+                'char') BUT floats and double are 8 bytes  long  and  double
+                floats are 10 bytes long;  dataSize()  cannot  so  know  the
+                exact size. To use them correctly, use only long,  double  &
+                pointers  as  parameters  and  count  two   parameters   (in
+                TParamText constructor) for a double. There seems to  be  no
+                way to use long doubles.
+
+   Patch: none
+
+
+
+TResourceFile
+-------------
+
+1. Problem - 32 bytes memory loss every time a TResourceFile
+             is instantiated and destroyed.
+   Patch: see TResourceFile-1
+
+
+TSItem
+------
+
+1. Problem - If you have a big TSItem object (with a lot of  nested  items),
+             the compiler stops with an error message "out of memory".
+   Work-around: Decompose your nested items list into several ones
+                see TSItem-1
+
+
+TSortedListBox
+--------------
+
+1. Problem - It is possible in a sorted list to select items by  typing  the
+             first characters. Then after pressing backspace,  the  previous
+             selected item should be selected again. This backspace does not
+             function as it should be.
+   Patch: see TSortedListBox-1
+
+
+TStaticText
+-----------
+
+1. Problem - a "\n" does not produce a blank line.
+   Work-around: use " \n"
+
+
+TStringList
+-----------
+
+1. Problem - TStringList class does not properly read in the values.
+   Patch: see TStringList-1
+
+
+TView
+-----
+
+1. Problem - If changing the sfVisible state of ANY view inside a TDialogBox,
+             the focused view is reset.
+   Patch: see TView-1
+
+
+TWindow
+-------
+
+1. Enhancement - Allow use of arrows like Tab/shift-Tab
+                 (if no other meaning - like in TRadioButton,...)
+   Patch: See TWindow-1
+
+
+2. Problem - If 'valid(cmClose)' returns False, the frame is lost.
+   Patch: See TWindow-2
+
+
+---------------------------------------------------------------
+                          PATCHES
+---------------------------------------------------------------
+File     : HELP.H
+Reference: Help-1
+Type     : Bug
+Patch    :
+
+  - add   '#define Uses_fpstream'   before   'include <tv.h>'
+
+---------------------------------------------------------------
+Function : THelpTopic::getLine
+File     : HELPBASE.CPP
+Reference: HelpBase-1
+Poster   : Patrick Reilly (compuserve: 71333,2764)
+Type     : Bug
+Patch    :
+
+  - change   char buffer[256];
+    to       static char buffer[256];
+
+---------------------------------------------------------------
+File     : SCHECKBO.CPP, SRADIOBU.CPP
+Reference: Streams-1
+Poster   : Tero Molander - (internet: tmo@phoenix.oulu.fi)
+Type     : Bug
+Patch    :
+
+  In both files:
+  - add   __link( RCluster )   after  'include <tv.h>'
+
+---------------------------------------------------------------
+Function : inputBox, inputBoxRect
+File     : MSGBOX.CPP
+Reference: MessageBox-2
+Type     : Enhancement
+Patch    :
+
+ in inputBox():
+  - change   TRect r(0, 0, 60, 8);
+    into     ushort len;
+             len = max( strlen(aLabel) + 9 + limit, strlen(Title) + 11 );
+             len = min( len, 60 );
+             len = max( len , 24 );
+             TRect r(0, 0, len, 8);
+
+ in inputBoxRect():
+  - change   TRect( 4 + strlen(aLabel), 2, dialog->size.x - 3, 3 );
+    into     uchar x = 4 + strlen( aLabel );
+             r = TRect( x, 2, min(x + limit + 2, dialog->size.x - 3), 3 );
+
+
+---------------------------------------------------------------
+Function : inputBoxRect
+File     : MSGBOX.CPP
+Reference: MessageBox-3
+Type     : Enhancement
+Patch    :
+
+ in inputBoxRect():
+  - change   r = TRect( dialog->size.x - 24, dialog->size.y - 4,
+                        dialog->size.x - 14 , dialog->size.y - 2);
+    into     r = TRect( dialog->size.x / 2 - 11, dialog->size.y - 4,
+                        dialog->size.x / 2 - 1 , dialog->size.y - 2);
+
+---------------------------------------------------------------
+Function : inputBoxRect, messageBoxRect
+File     : MSGBOX.CPP
+Reference: MessageBox-5
+Type     : Bug
+Patch    :
+
+ in messageBoxRect() and inputBoxRect():
+
+  - change   ccode = TProgram::deskTop->execView(dialog);
+    into     ccode = TProgram::application->execView(dialog);
+
+---------------------------------------------------------------
+Function : isBlank
+File     : HELPBASE.CPP
+Reference: Help-4
+Type     : Bug
+Poster   : JFreeman internet: STAC/STAC/JFreeman%Stac_Electronics@mcimail.com)
+Patch:
+  - change   if (isspace(ch))
+    into     if ( isspace((unsigned char)ch) )
+
+---------------------------------------------------------------
+Function : messageBoxRect, messageBox
+File     : MSGBOX.CPP
+Reference: MessageBox-1
+Type     : Bug
+Patch    :
+
+ in messageBoxRect() and messageBox():
+  - add   'va_end( argptr );'   before   'return'
+
+  - change   va_start( argptr, aOptions );
+    into     va_start( argptr, fmt );
+
+---------------------------------------------------------------
+Function : min/max
+File     : UTIL.H
+Reference: min/max-1
+Type     : Bug
+Poster   : Vincent Van Den Berghe - Windows/DOS developer's journal April 93
+Patch    :
+
+  - before   inline int min/max( int a, int b )
+    add      template <class T> inline T min/max( const T &a, const T &b )
+
+---------------------------------------------------------------
+Function : TPalette::TPalette, TPalette::operator =
+File     : PALETTE.C
+Reference: TPalette-1
+Type     : Bug
+Poster   : Tero Internet: tmo@rieska.oulu.fi
+Patch    :
+
+  - change   TPalette::TPalette( const TPalette& tp ) :
+                data( new char[ tp.data[0] ] )
+             {
+              memcpy( data, tp.data, tp.data[0] );
+             }
+
+
+    into     TPalette::TPalette( const TPalette& tp ) :
+                data( new char[ tp.data[0] + 1 ] )
+             {
+              memcpy( data, tp.data, tp.data[0] + 1 );
+             }
+
+    Warning: add '+ 1' at the two places.
+
+
+  - in TPalette::operator =
+
+  change   data = new char[ tp.data[0] ];
+  into     data = new char[ tp.data[0] + 1 ];
+
+---------------------------------------------------------------
+Function : TButton::handleEvent
+File     : TBUTTON.CPP
+Reference: TButton-1
+Type     : Bug
+Patch    :
+
+ - after    case evBroadcast:
+                switch( event.message.command )
+                    {
+                    case cmDefault:
+
+   change   if( amDefault )
+
+   into     if( amDefault && !(state & sfDisabled) )
+
+---------------------------------------------------------------
+Function : TCluster::handleEvent
+File     : TCLUSTER.CPP
+Reference: TCluster-1
+Type     : Bug
+Patch    :
+
+   between  TView::handleEvent(event);
+   and      if( event.what == evMouseDown )
+                { ...
+
+   add      if ( ! (options & ofSelectable) ) return;
+
+---------------------------------------------------------------
+Function : TChDirDialog::shutdown
+File     : TCHDRDLG.CPP
+Reference: TChDirDialog-1
+Type     : Bug
+Patch    :
+
+ - change   dirList = 0;
+            dirList = 0;
+
+   into     dirList = 0;
+            dirInput = 0;
+
+---------------------------------------------------------------
+Function : TCollection::shutdown
+File     : TCOLLECT.CPP
+Reference: TCollection-1
+Type     : Bug
+Poster   : David Sisson   (internet: daves@vt.edu)
+Patch    :
+
+ - after      if( shouldDelete )
+                  freeAll();
+
+   add        else
+                  count = 0;
+
+---------------------------------------------------------------
+Function : TDialog::getPalette
+File     : TDIALOG.CPP
+Reference: TDialog-1
+Type     : Bug
+Patch    :
+
+   TPalette& TDialog::getPalette() const
+   {
+    static TPalette palette1( cpDialog, sizeof(cpDialog) - 1 );
+    static TPalette palette2( 0, 0 );
+
+    if ( (owner == (TGroup*)TApplication::deskTop) ||
+         (owner == (TGroup*)TApplication::application)
+       ) return palette1;
+    return palette2;
+   }
+
+   add:       #define Uses_TApplication
+   before:    #include <tv.h>     ( at the begining of file )
+
+---------------------------------------------------------------
+Function : TDirCollection::getCurDir
+File     : TDIRCOLL.CPP
+Reference: TDirCollection-1
+Type     : Bug
+Patch    :
+
+   after    dir[0] = ...
+            dir[1] = ':';
+            dir[2] = '\\';
+
+   add      dir[3] = '\0';
+
+---------------------------------------------------------------
+Function : TEditor::nextWord
+File     : TEDITOR2.CPP
+Reference: TEditor-1
+Type     : Bug
+Patch    :
+
+ ushort TEditor::nextWord( ushort p )
+ {
+  if ( isWordChar(bufChar(p)) )
+     while ( p < bufLen && isWordChar(bufChar(p)) ) p = nextChar(p);
+  else if ( p < bufLen ) p = nextChar(p);
+
+  while( p < bufLen && ! isWordChar(bufChar(p)) ) p = nextChar(p);
+
+  return p;
+ }
+
+---------------------------------------------------------------
+Function : TFileDialog::valid
+File     : TFILDLG.CPP
+Reference: TFileDialog-1
+Type     : Bug
+Poster   : Vincent Van Den Berghe - Windows/DOS developer's journal April 93
+Patch    :
+
+ - change   if( command == 0 )
+                return True;
+
+            if( TDialog::valid( command ) )
+                {
+                ...
+                }
+
+   into     if ( ! TDialog::valid( command ) ) return False;
+            if ( command == cmValid ) return True;
+
+            {
+            ...
+            }
+
+ - or, to better structure the code:
+
+Boolean TFileDialog::valid(ushort command)
+{
+ if ( ! TDialog::valid( command ) ) return False;
+ if ( command == cmValid || command == cmCancel || command == cmFileClear )
+    return True;
+
+ char fName[MAXPATH], drive[MAXDRIVE], dir[MAXDIR], name[MAXFILE], ext[MAXEXT];
+
+ getFileName( fName );
+
+ if ( isWild(fName) )
+    {
+     fnsplit( fName, drive, dir, name, ext );
+     char path[MAXPATH];
+     strcpy( path, drive );
+     strcat( path, dir );
+     if ( checkDirectory(path) )
+        {
+         delete (char *)directory;
+         directory = newStr( path );
+         strcpy( wildCard, name );
+         strcat( wildCard, ext );
+         if ( command != cmFileInit ) fileList->select();
+         fileList->readDirectory( directory, wildCard );
+        }
+     return False;
+    }
+
+ if ( isDir(fName) )
+    {
+     if ( checkDirectory(fName) )
+        {
+         delete (char *)directory;
+         strcat( fName, "\\" );
+         directory = newStr( fName );
+         if ( command != cmFileInit ) fileList->select();
+         fileList->readDirectory( directory, wildCard );
+        }
+     return False;
+    }
+
+ if ( validFileName(fName) ) return True;
+
+ messageBox( invalidFileText, mfError | mfOKButton );
+ return False;
+}
+
+---------------------------------------------------------------
+Function : TFileList
+File     : TFILDLG.CPP
+Reference: TFileDialog-2
+Type     : Bug
+Poster   : JFreeman (internet: STAC/STAC/JFreeman%Stac_Electronics@mcimail.com)
+Patch:
+  - change   if (isspace(ch))
+
+    into     if ( isspace((unsigned char)ch) )
+
+---------------------------------------------------------------
+File     : TFILDLG.CPP
+Reference: TFileDialog-3
+Type     : Bug
+Patch:
+  - change   TFileDialog::TFileDialog( ... ) :
+                          TDialog( ... ),
+                          directory( 0 ),
+                          TWindowInit( ... )
+
+    into     TFileDialog::TFileDialog( ... ) :
+                          TDialog( ... ),
+                          directory( newStr("") ),
+                          TWindowInit( ... )
+
+    in TFileDialog::readDirectory:
+
+  - before    directory = newStr( curDir );
+    add       delete (char *)directory;
+
+---------------------------------------------------------------
+Function : TFileList::readDirectory
+File     : TFILLIST.CPP
+Reference: TFileList-1
+Type     : Bug
+Patch:
+  - change   if( strlen(dir) > 4 )
+
+    into     if( strlen(dir) > 1 )
+
+---------------------------------------------------------------
+Function : TGroup::setCurrent
+File     : TGROUP.CPP
+Reference: TGroup-1
+Type     : Enhancement
+Patch    :
+
+  - after    focusView( current, False );
+    add      // Test if focus lost was allowed and focus has really been loose
+             if ( (mode == normalSelect) &&
+                  current &&
+                  (current->state & sfFocused)
+                )
+                {
+                 unlock();
+                 return;
+                }
+
+ for coherency:
+  - replace   if( (state & sfFocused) != 0 && p != 0 )
+                p->setState( sfFocused, True );
+
+    by        focusView( p, True);
+
+---------------------------------------------------------------
+Function : TGroup::shutDown
+File     : TGROUP.CPP
+Reference: TGroup-2
+Type     : Bug
+Poster   : Marek Bojarski  (internet: bojarski@if.uj.edu.pl)
+Patch    :
+
+  - add      resetCurrent();
+    at the first line of function
+
+---------------------------------------------------------------
+Function : THelpTopic::WrapText
+File     : HELPBASE.CPP
+Reference: Help-6
+Type     : Bug
+Poster   : Peter Brandstrom  (internet: d91-pbr@nada.kth.se)
+Patch:
+
+ - change   if (i == offset)
+                i = offset + width;
+            else
+                ++i;
+
+    into    if (i == offset)
+               {
+                i = offset + width;
+                while ( (i < size) && !isBlank(text[i]) )
+                  ++i;
+                if ( i < size )
+                  ++i;                    // Skip blank
+                }
+            else
+                ++i;
+
+
+---------------------------------------------------------------
+Function : THelpViewer::changeBounds
+File     : HELP.CPP, HELP.H
+Reference: Help-3
+Type     : Bug
+Poster   : JFreeman (internet: STAC/STAC/JFreeman%Stac_Electronics@mcimail.com)
+Patch:
+
+    In help.cpp:
+ - change   void THelpViewer::changeBounds( TRect& bounds )
+    into    void THelpViewer::changeBounds( const TRect& bounds )
+
+    In help.h:
+ - change   virtual void changeBounds( TRect& );
+    into:   virtual void changeBounds( const TRect& );
+
+---------------------------------------------------------------
+Function : THelpViewer::draw, THelpViewer::makeSelectVisible
+File     : HELP.CPP
+Reference: Help-2
+Type     : Bug
+Poster   : Bill Kirby (Borland)
+Patch    :
+
+ * in draw - line 116:
+  - change   do
+                {
+                ++keyCount;
+                topic->getCrossRef(keyCount-1, keyPoint, keyLength, keyRef);
+                } while ( (keyCount <= topic->getNumCrossRefs()) && (keyPoint.y < delta.y));
+
+
+    into     do
+                {
+                topic->getCrossRef(keyCount, keyPoint, keyLength, keyRef);
+                ++keyCount;
+                } while ( (keyCount < topic->getNumCrossRefs()) && (keyPoint.y <= delta.y));
+
+
+ * in draw - line 149:
+  - change   ++keyCount;
+             if (keyCount <= topic->getNumCrossRefs())
+                topic->getCrossRef(keyCount-1, keyPoint, keyLength, keyRef);
+             else
+
+
+    into     if ( keyCount < topic->getNumCrossRefs() )
+                {
+                topic->getCrossRef(keyCount, keyPoint, keyLength, keyRef);
+                ++keyCount;
+                }
+             else
+
+
+ * in makeSelectVisible - line 178:
+  - change   if (keyPoint.y < d.y)
+                d.y = keyPoint.y;
+
+    into     if (keyPoint.y <= d.y)
+                d.y = keyPoint.y - 1;
+
+---------------------------------------------------------------
+Function : THelpViewer::handleEvent
+File     : HELP.CPP
+Reference: Help-5
+Type     : Bug
+Patch:
+
+ - in    case evCommand:
+            if ((event.message.command == cmClose) && (owner->state && sfModal != 0))
+                {
+                endModal(cmClose);
+                clearEvent(event);
+                }
+
+   change   (owner->state && sfModal != 0)
+   into     ((owner->state & sfModal) != 0))
+
+---------------------------------------------------------------
+Function : TInputLine::handleEvent
+File     : TINPUTLI.CPP
+Reference: TInputLine-1
+Type     : Bug
+Patch    :
+
+ line 244:
+  - change   if( (state & sfCursorIns) != 0 )
+               strcpy( data + curPos, data + curPos + 1 );
+             else
+               deleteSelect();
+
+    into     deleteSelect();
+             if ( (state & sfCursorIns) && (curPos < strlen(data)) )
+                strcpy( data + curPos, data + curPos + 1 );
+
+---------------------------------------------------------------
+File     : TINPUTLI.CPP
+Reference: TInputLine-2
+Type     : Bug
+Patch    :
+
+ in handleEvent:
+  - change   i = curPos - size.x + 3;
+    into     i = curPos - size.x + 2;
+
+ in selectAll:
+  - change   firstPos = max( 0, curPos-size.x+3 );
+    into     firstPos = max( 0, curPos-size.x+2 );
+
+---------------------------------------------------------------
+Function : TLabel::handleEvent
+File     : TLABEL.CPP
+Reference: Selection-1
+Type     : Bug
+Patch    :
+
+  - change   if ( link != 0 )
+    into     if ( link && (link->options & ofSelectable) && !(link->state & sfDisabled) )
+
+  Warning: Change this in two lines (84, 96)
+
+---------------------------------------------------------------
+Function : TListViewer::focusItem, TListViewer::setRange
+File     : TLSTVIEW.CPP
+Reference: TListViewer-1
+Type     : Bug
+Poster   : Vincent Van Den Berghe - Windows/DOS developer's journal April 93
+Patch    :
+
+  - in focusItem:
+    change   if( vScrollBar != 0 )
+                 vScrollBar->setValue( item );
+
+    into     if( vScrollBar != 0 )
+                 vScrollBar->setValue( item );
+             else drawView();
+
+  - in setRange:
+    change   if( vScrollBar != 0 )
+                 {
+                 if( focused > aRange )
+                     focused = 0;
+                 vScrollBar->setParams( ... );
+                 }
+
+    into     if( focused > aRange ) focused = 0;
+             if( vScrollBar != 0 )
+                 vScrollBar->setParams( ... );
+             else drawView();
+
+---------------------------------------------------------------
+Function : TListViewer::handleEvent
+File     : TLSTVIEW.CPP
+Reference: TListViewer-3
+Type     : Bug
+Poster   : Vincent Van Den Berghe - Windows/DOS developer's journal April 93
+Patch    :
+
+  - after the do-while loop, suppress
+          if( event.mouse.doubleClick && range > focused )
+              selectItem( focused );
+
+  - before 'mouse = makeLocal( event.mouse.where );',
+    in the do-while loop, add:
+          if( event.mouse.doubleClick && range > focused )
+              {
+               selectItem( focused );
+               break;
+              }
+
+---------------------------------------------------------------
+Function : TMenuView::execView
+File     : TMNUVIEW.CPP
+Reference: TMenuView-1
+Type     : Bug
+Poster   : Vincent Van Den Berghe - Windows/DOS developer's journal April 93
+Patch    :
+
+  - at line 321, after:
+        if( result != 0 && commandEnabled(result) )
+            {
+            action =  doReturn;
+            clearEvent(e);
+            }
+    add:
+        else result = 0;
+
+---------------------------------------------------------------
+Function : TMenuView::updateMenu
+File     : TMNUVIEW.CPP
+Reference: TMenuView-2
+Type     : Bug
+Patch    :
+
+  - at first line of function, add:
+
+        if ( ! menu ) return False;
+
+
+---------------------------------------------------------------
+Function : TNSCollection::setLimit
+File     : TCOLLECT.CPP
+Reference: TNSCollection-1
+Type     : Bug
+Poster   : Phar Lap
+Patch    :
+
+ - replace    if( count !=  0 )
+                memcpy( aItems, items, count*sizeof(void *) );
+
+   by         if((count !=  0) && (aItems != 0) && (items != 0))
+                memcpy( aItems, items, count*sizeof(void *) );
+
+---------------------------------------------------------------
+Function : TParamText::setData
+File     : TPARAMTE.CPP
+Reference: TParamText-1
+Type     : Bug
+Patch    :
+
+  - change   paramList = &rec;
+    into     paramList = rec;
+
+---------------------------------------------------------------
+Function : TParamText::getText
+File     : TPARAMTE.CPP
+Reference: TParamText-2
+Type     : Bug
+Patch    :
+
+  - change   vsprintf( s, text, paramList );
+    into           {
+                    char buf[256];  // maximum allowed inside vsprint()
+                    memcpy( buf, paramList, paramCount * sizeof(long) );
+                    vsprintf( s, text, buf );
+                   }
+
+---------------------------------------------------------------
+Function : TResourceFile::TResourceFile
+File     : TRESFILE.CPP
+Reference: TResourceFile-1
+Type     : Bug
+Patch    :
+
+  - add at the last line of the function (before returning):
+    delete( header );
+
+---------------------------------------------------------------
+File     : TSCREEN.CPP
+Reference: performance-1
+Type     : Bug
+Poster   : Borland
+Patch    :
+
+  - change   TScreen::checkSnow = True;
+
+    into     TScreen::checkSnow = False;
+
+---------------------------------------------------------------
+Reference: TSItem-1
+Type     : Bug
+Work-around:
+
+  - change   TSItem *item = new TSItem( "item1",
+                            new TSItem( "item2",
+                            ...
+                            new TSItem( "itemY",
+                            new TSItem( "itemZ",
+                            0 )))...);
+
+    into     TSItem *item2 = new TSItem( "itemB",
+                             new TSItem( "itemC",
+                             ...
+                             new TSItem( "itemZ",
+                             0 )))...);
+
+             TSItem *item  = new TSItem( "item1",
+                             new TSItem( "item2",
+                             ...
+                             new TSItem( "itemA",
+                             item2 )))...);
+
+
+---------------------------------------------------------------
+Function : TSortedListBox::handleEvent
+File     : STDDLG.CPP
+Reference: TSortedListBox-1
+Type     : Bug
+Poster   : (internet: twoeme@rivm.nl)
+Patch    :
+
+  - change    if( event.keyDown.keyCode == kbBack )
+                {
+                if( searchPos == USHRT_MAX )
+                    return;
+                searchPos--;
+                if( searchPos == USHRT_MAX )
+                    shiftState = shiftKeys;
+                curString[searchPos] = EOS;
+                }
+
+  - into      if( event.keyDown.keyCode == kbBack )
+                {
+                if( searchPos == USHRT_MAX )
+                    return;
+                curString[searchPos--] = EOS;
+                if( searchPos == USHRT_MAX )
+                    shiftState = shiftKeys;
+                }
+
+---------------------------------------------------------------
+Function : TStringList::get
+File     : TSTRLST.CPP
+Reference: TStringList-1
+Type     : Bug
+Poster   : Dave (internet: daves@vt.edu)
+Patch    :
+
+  - change   while( cur->key + MAXKEYS < key && cur - index < indexSize )
+                 cur++;
+             if( cur->key + MAXKEYS < key )
+                 {
+                 *dest = EOS;
+                 return;
+                 }
+
+    into     while ( (cur->key + cur->count - 1 < key) &&
+                     (cur - index < indexSize)
+                   )
+                   cur++;
+             if ( (cur->key + cur->count - 1 < key) || (cur->key > key) )
+                {
+                 *dest = EOS;
+                 return;
+                }
+
+---------------------------------------------------------------
+File     : SYSERR.CPP, SYSINT.ASM, SYSTEM.H, TVTEXT2.CPP
+Reference: System-1
+Type     : Bug
+Poster   : Eric Woodruff   (compuserve: 72134,1150)
+
+Patch    :
+
+ in SYSERR.CPP:
+
+  - change    sprintf( s, errorString[errorCode], drive + 'a' );
+
+  - into      if ( errorCode < sizeof(errorString) / sizeof(*errorString) )
+                 sprintf( s, errorString[errorCode], drive + 'A' );
+              else
+                 sprintf( s, "Critical error %d on drive %c", errorCode, drive + 'A' );
+
+
+ in SYSINT.ASM:
+
+  - line 568:
+    change   PUSH    AX
+             PUSH    DX
+             MOV     AX,SEG @TSystemError@sysErrorFunc
+             MOV     ES,AX
+             CALL    [ES:@TSystemError@sysErrorFunc]
+             POP     CX
+
+    into     PUSH    DX  ; Parameters were pushed
+             PUSH    AX  ; in the wrong order.
+             MOV     AX,SEG @TSystemError@sysErrorFunc
+             MOV     ES,AX
+             CALL    [ES:@TSystemError@sysErrorFunc]
+             POP     CX  ; Preserve AX by POPing into CX.
+             POP     DX  ; Someone forgot to clean up after themselves.
+             POP     CX
+
+  - line 580 (582 if the above change is made):
+    change   JC      @@1
+             MOV     DS:[504H],DL
+
+    into     ;JC     @@1  ; Ignore cancellation and imitate DOS
+                          ; by setting the flag anyway.
+                          ; If not, this routine gets called again
+                          ; for the same reason via another INT 21H call.
+             MOV     DS:[104H],DL  ; Who knows what DS:[504H] does
+
+
+ in SYSTEM.H:
+  - change   errorString[14]
+    into     errorString[16]
+
+
+ in TVTEXT2.CPP:
+  - change   const char * const near TSystemError::errorString[] =
+             {
+             ...
+             }
+
+    into     const char * const near TSystemError::errorString[] =
+             {
+              "Disk is write-protected in drive %c",            // 0
+              "Unknown unit %c",                                // 1
+              "Disk is not ready in drive %c",                  // 2
+              "Critical error (unknown command) on drive %c",   // 3
+              "Data integrity error on drive %c",               // 4 bad CRC
+              "Critical error (bad request) on drive %c",       // 5
+              "Seek error on drive %c",                         // 6
+              "Unknown media type in drive %c",                 // 7
+              "Sector not found on drive %c",                   // 8
+              "Printer out of paper",                           // 9
+              "Write fault on drive %c",                        // 10
+              "Read fault on drive %c",                         // 11
+              "General failure on drive %c",                    // 12
+              "Bad memory image of FAT detected",             // 13
+              "Device access error",                          // 14
+              "Insert diskette in drive %c"                     // 15
+             }
+
+---------------------------------------------------------------
+Function : TView::setState
+File     : TVIEW.CPP
+Reference: TView-1
+Type     : Bug
+Poster   : Vincent Van Den Berghe - Windows/DOS developer's journal April 93
+Patch    :
+
+!!!  Warning - Correction  !!!
+This does not work: with this code there is no current view selected
+                    because TV seems to rely on selection when setting
+                    inserted all views state to visible instead of
+                    explicitly reset selection after all views have
+                    been inserted.
+
+ - change  if( (options & ofSelectable) != 0 )
+   into    if( (options & ofSelectable) && !enable && owner->current == this )
+
+One (easy) way to achieve the goal would be:
+
+ - if( ((options & ofSelectable) && !enable && owner->current == this)
+       || ! owner->current
+     )
+
+but the last item would be selected inside a view in place
+of the first one.
+
+---------------------------------------------------------------
+Function : TWindow::handleEvent
+File     : TWINDOW.CPP
+Reference: TWindow-1
+Type     : Enhancement
+Patch    :
+
+  -  after    case  kbTab:
+     add      case  kbDown:
+              case  kbRight:
+
+     after    case  kbShiftTab:
+     add      case  kbUp:
+              case  kbLeft:
+
+---------------------------------------------------------------
+Function : TWindow::close
+File     : TWINDOW.CPP
+Reference: TWindow-2
+Type     : Bug
+Poster   : Vincent Van Den Berghe - Windows/DOS developer's journal April 93
+Patch    :
+
+void TWindow::close()
+{
+    if ( valid( cmClose ) )
+       {
+        frame = 0;  // so we don't try to use the frame after it's been deleted
+        destroy( this );
+       }
+}
+
+---------------------------------------------------------------
+Reference: compilation
+Type     : Bug
+Poster   : Borland
+Patch    :
+
+  Recompile each module with the following command line.
+  You may need to make adjustments to the include directory path for
+  the compiler to find <tv.h>.  (See the 3.1 User's Guide p. 172
+  and p. 174-177 for details.)
+  The -Vs -Y & -B are mandatory to have TV overlay-compatible.
+
+          bcc -c -P -O1 -ml -Y -Vs -B -DNDEBUG XXX.cpp
+          tlib /0 ..\lib\tv.lib -+XXX.obj
+
+  The -DNDEBUG defines the NDEBUG symbol and will cause compilation
+  (especially for NEW.CPP) without the extra debugging code.
+  If you only installed the Integrated Development environment
+  on your system, you can rebuild a module by setting the
+  following options and compiling it.
+  Once the module has been compiled, execute the TLIB command shown above.
+
+       Options | Compiler | Optimizations:
+                           Set to smallest code.
+
+       Options | Compiler | Code Generation:
+                           Set for large memory model.
+
+       Options | Directories:
+                           Set the correct include paths.
+
+          Options | Compiler | Code Generation | Defines:
+                      Add NDEBUG to this line.
+
+
+  Important remark:
+  If you want to overlay TV itself, you have to put some objects
+  (drivers, drivers2, syserr, sysint, swapst, tevent, tscreen)
+  in a separate library (ex. TVNOOVR.LIB) THAT CANNOT BE OVERLAYED.
+
+  To actually use TV.LIB in overlay, link it to your program
+  with  'tlink ... TVNOOVR.LIB /o TV.LIB ...'
+
+  or, from the IDE, add them explicitly to your project
+  (and disable TV from 'Options | Linker | Libraries | TV')
+  and specify to overlay TV.LIB in project local options.
+
+--------------------------------------------------------------------
+Marc Stern                        Computer Engineer
+Av. de la Basilique 386 - 19      Phone:    (322) 525.63.32
+1080 Bruxelles                    FAX:      (322) 525.66.00
+BELGIUM                           Internet: stern@mble.philips.be
+                                  compuserve: >INTERNET:stern@mble.philips.be
+
+
+ ################################################################
+ #                                                              #
+ # Announce:   TVTOOLS  -  general-purpose Turbo-Vision Tools   #
+ #                         (library, sources and documentation) #
+ #                                                              #
+ # All this stuff is free.    Available as TVTOOLxx.ZIP         #
+ ################################################################
+
+----------------------------------------------------------------------------
+To all those interested,
+    I saw the messages over the course of the past week concerning the
+problems with SYSINT.ASM crashing when you try to access drive B: on a
+"drive A: only" type of system.  The general feeling was that to fix it,
+you get rid of all the Int21Handler code because that's where the
+problem was.  I thought that was rather a drastic approach because if
+you know where the problem is, why not look into trying to fix it?!?
+Don't delete part of the application because it doesn't work, locate and
+correct the problem instead!  Since I work with one of those type of
+systems, I set out to find the real problem today.  As it turns out,
+SYSINT.ASM **CAN** be fixed and **WILL** work properly.  I'm surprised
+that nobody else found these errors before me.  It only takes a quick
+look and step through the SYSINT.ASM code with the IDE's debugger to
+notice the glaringly obvious causes (sorry if this all sounds so harsh,
+but they are obvious if you'd take a moment to look for the causes of
+this problem instead of writing it all off to unusable code).
+    There are basically three show-stopping problems with the existing
+code and they are all in the CheckName routine.
+
+    1. The parameters in the call to sysErrorFunc() are backwards.  This
+       results in the strange message about an error on drive P:.
+
+    2. After the call, those same two parameters are never POPped off of
+       the stack.  Hence the rather swift crash and burn the routine
+       does when it tries to return to its caller.
+
+    3. Even when those two problems are fixed, SYSINT.ASM was written to
+       update the Single Drive Flag using location DS:[504H] instead of
+       DS:[104H], the proper location (which it does read properly at
+       the top of the CheckName routine).  I don't know what the other
+       location is for, but it also brings the application to a rather
+       abrupt halt.
+
+    Once you get those fixed, it will work as originally intended.
+However, it will call the display routine a second time if ESC is
+pressed because it won't set the flag.  To fix that little annoyance,
+I've made it emulate DOS and set the flag anyway regardless of whether
+ENTER or ESC is pressed.  There are also some changes needed to the
+error strings in TVTEXT2.CPP.
+
+Here's how to fix everything:
+
+    I'll upload these changes to the Turbo Vision library and also file
+a TI1171 form with Borland so that everyone has a chance to get hold of
+the changes.
+
+In SYSTEM.H, change the size of the errorString declaration to:
+
+    static const char *const near errorString[16];      // Was [14].
+
+In TVTEXT2.CPP, replace the errorString array with:
+
+// BUG FIX.  Recorded in one of the TVBUGS.ZIP files on CompuServe
+// but it commented out or deleted the last two messages.
+//
+// Change errorString declaration in SYSTEM.H to [16]!
+//
+const char * const near TSystemError::errorString[] =
+{
+    "Disk is write-protected in drive %c",
+    "Critical disk error on drive %c",          // Unknown unit.
+    "Disk is not ready in drive %c",
+    "Critical disk error on drive %c",          // Unknown command
+    "Data integrity error on drive %c",         // Bad CRC
+    "Critical disk error on drive %c",          // Bad request
+    "Seek error on drive %c",
+    "Unknown media type in drive %c",
+    "Sector not found on drive %c",
+    "Printer out of paper",
+    "Write fault on drive %c",
+    "Read fault on drive %c",
+    "General failure on drive %c",
+    "Bad memory image of FAT detected",
+    "Device access error",
+    "Insert diskette in drive %c"
+};
+
+In SYSINT.ASM lines 567-573 are:
+
+    MOV     AX,15
+    PUSH    AX
+    PUSH    DX
+    MOV     AX,SEG @TSystemError@sysErrorFunc
+    MOV     ES,AX
+    CALL    [ES:@TSystemError@sysErrorFunc]
+    POP     CX
+
+Change them to (will become lines 567-576):
+
+    MOV     AX,15
+    PUSH    DX            ;// BUG FIX.  EFW - 06/08/93
+    PUSH    AX            ;// Parameters were pushed in the wrong order.
+    MOV     AX,SEG @TSystemError@sysErrorFunc
+    MOV     ES,AX
+    CALL    [ES:@TSystemError@sysErrorFunc]
+    ;// BUG FIX.  EFW - 06/08/93
+    POP     CX            ;// Preserve AX by POPing into CX.
+    POP     DX            ;// Someone forgot to clean up after themselves.
+    POP     CX
+
+In SYSINT.ASM lines 578-583 are (starts at line 581 if the above
+change is made):
+
+        POP     ES
+        NEG     AX
+        JC      @@1
+        MOV     DS:[504H],DL
+@@1:    POP     AX
+        POP     DS
+
+Change them to (will become lines 581-589 with the above change):
+
+        POP     ES              ;// BUG FIX. EFW - 06/08/93
+        NEG     AX              ;// Ignore cancellation and imitate DOS
+;//        JC      @@1          ;// by setting the flag anyway.  If not,
+;                               ;// this routine gets called again for the
+;                               ;// same reason via another INT 21H call.
+
+        MOV     DS:[104H],DL    ;// Who knows what DS:[504H] does
+@@1:    POP     AX              ;// (except cause a crash)? DS:[104H] is
+        POP     DS              ;// where we want to be.
+
+*******************************************************************************
+
+    That's all there is to it.  Once you've made the modifications,
+change directories to \BC\TVISION\SOURCE (substitute your path as
+necessary) and issue the command:  make -fmakefile
+    I think it's best to rebuild the library because by doing the MAKE,
+you can insure that everthing that needs updating gets recompiled due
+mainly to the changes in TVTEXT2.CPP and SYSTEM.H.  They affect a large
+number of files.
+
+Eric Woodruff,  CIS ID: 72134,1150
+Tue 06/08/93 19:33:57
+

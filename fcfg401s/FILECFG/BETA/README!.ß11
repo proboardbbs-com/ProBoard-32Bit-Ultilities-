@@ -1,0 +1,17 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+
+Fixed an error when a record is added and edit is selected, the numbers
+were all wrong. Now you have to save to disk before editing (after you
+add records).
+
+Added the online help system. Check it out.
+
+Added an overlaid version - it is a lot slower, but requires a lot less
+memory. So, the choice is yours. It will not be distributed with the
+whole package, but it will be made available in a separate archive. To
+use the online help with it, rename the FILECFG.HLP to whatever the name
+of the executable is (FILECFGX.HLP for example).
+
+Refined the status line hints too.
+
+Any more ideas?

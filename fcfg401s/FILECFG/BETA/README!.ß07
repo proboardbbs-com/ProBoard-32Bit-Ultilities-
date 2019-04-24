@@ -1,0 +1,63 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+
+Note
+----
+	There have been many changes in the file processing code. Please,
+	make a manual backup of your files (FILECFG.PRO and MESSAGES.PB) to a
+	separate location before trying this out. It seems to work fine, but I
+	haven't had enough time to test the routines thoroughly.
+
+Bug fixes
+---------
+	Fixed a bug in the 'reply-To' determining when areas were reordered.
+	The logic would sometimes fail especially when areas got swapped with
+	the 'reply-to' ones.
+
+Functional changes
+------------------
+	Added individual file area editing! Now you don't have to leave FileCFG
+	for anything related to editing file and message areas! I plan to make
+	the group selection even better (with a list of groups to select from,
+	not remembering stupid numbers). Note that when you select 'Yes' to the
+	update prompts, the data will be immediately saved to the original
+	file. A couple of nifty things to note in the individual editor:
+
+			(a) the flags selection can be done directly by typing the
+				letter/digits when the line is active, or by clicking with
+				the mouse in the appropriate character, or by pressing
+				Enter and editing in the box that will appear.
+
+			(b) you can use a directory selection dialog box to choose the
+				directory name for your file location. Just press Enter
+				when the cursor is positioned on the file location input
+				line. To change the drive, click on 'Drives'.
+
+			(c) you can use a file selection dialog box to choose the file
+				listing name. Just press Enter when the cursor is
+				positioned on the file listing input line. Note that you
+				can switch drives too, just type the character of the
+				drive, followed by a colon (D:) in the input box. You will
+				be able to switch to that drive and browse the directories
+				there.
+
+	Replaced C-in-C++ code with straight C++ (now FileCFG uses file
+	streams as defined in <fstream.h> instead of the old <stdio.h> C
+	versions. I am not sure this is a significant improvement, but the
+	code looks like C++ even more. :-)
+
+	Because of the above editing function, the 'Quit' button is gone. It
+	has been replaced by the 'Edit' button. To quit, you can simply press
+	Escape or click on the rectangle in the upper left corner of the box.
+
+Projects for next beta
+----------------------
+	Individual message area editing.
+
+	Instead of just typing group numbers, present list of all groups and
+	be able to select from it!
+
+	... anything else you want to see?
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.

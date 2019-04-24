@@ -1,0 +1,37 @@
+THIS IS A CLOSED BETA VERSION! DO NOT DISTRIBUTE!
+(I hope this is the final beta before the release!)
+
+Functional changes
+------------------
+
+	Enabled global changes in the message area editor. Now you can change
+	read, write, and sysop level and flags. You can also change the all
+	groups flag, the 'kill after' values, and the maximum messages.
+
+	Added the 'max files' and 'max kb' to the global change options in the
+	file area editor.
+
+	Added ability to change the sysop name and default origin line in the
+	message area editor.
+
+	Added the ability to change the message base type, kind and format.
+
+	Added the ability to change the name options for the area.
+
+	Added the ability to change the system AKA for range of areas. This
+	function reads your ProBoard configuration to find out your AKAs.
+
+	Added a new keyword to the SILICON.INI file (this is intended for
+	the BlueWave setup for my configuration):
+
+			[FileCFG]
+			BlueWave=D:\SBIN\BWAVE\BWSETUP.EXE
+			BWmenu=~B~lueWave Setup
+
+	Please, refer to readme!.á02 for the proper format of these entries.
+	This menu item will appear in the message editor menu, where InterEcho
+	is right now.
+
+Comments? Suggestions?
+----------------------
+	As usual, your comments and suggestions are welcome in the beta echo.
